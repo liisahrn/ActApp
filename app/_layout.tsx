@@ -1,3 +1,4 @@
+import "../global.css";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
@@ -26,7 +27,7 @@ export default function RootLayout() {
 	}, [fetchProfile, setSession]);
 
 	return (
-		<GestureHandlerRootView style={{ flex: 1 }}>
+		<GestureHandlerRootView className="flex-1">
 			<StatusBar style="light" />
 			<Stack screenOptions={{ headerShown: false }}>
 				<Stack.Screen name="index" />
