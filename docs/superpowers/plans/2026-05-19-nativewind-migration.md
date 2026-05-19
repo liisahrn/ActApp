@@ -87,16 +87,105 @@ git commit -m "chore: install nativewind and wire metro transformer"
 
 ---
 
-## Task 2: Tailwind config, global CSS, and TypeScript types
+## Task 2: Single source of truth — tokens, Tailwind config, global CSS, TypeScript types
+
+`tailwind.config.js` is CommonJS (`require()`), but `theme.ts` is ESM (`export const`). The bridge is `constants/tokens.js` — a plain CommonJS file holding all raw design values. `tailwind.config.js` requires it; `theme.ts` imports from it. Token values live in exactly one place.
 
 **Files:**
+
+- Create: `constants/tokens.js`
+- Modify: `constants/theme.ts`
 - Create: `tailwind.config.js`
 - Create: `global.css`
 - Create: `nativewind-env.d.ts`
 
-- [ ] **Step 1: Create `tailwind.config.js`**
+- [ ] **Step 1: Create `constants/tokens.js`** (single source of truth for all design tokens)
 
 ```js
+// CommonJS — consumed by tailwind.config.js (Node) and imported by theme.ts (TypeScript)
+const Colors = {
+  gradientA: '#0B1F0C',
+  gradientB: '#163318',
+  gradientC: '#1A3D1C',
+  gradientD: '#0B1F0C',
+  primary: '#5ABF50',
+  primaryDark: '#3D9E34',
+  primaryLight: 'rgba(90,191,80,0.18)',
+  accent: '#D4553A',
+  accentLight: 'rgba(212,85,58,0.18)',
+  background: '#0B1F0C',
+  surface: 'rgba(255,255,255,0.07)',
+  surfaceStrong: 'rgba(255,255,255,0.13)',
+  surfaceAlt: 'rgba(255,255,255,0.04)',
+  surfaceDark: 'rgba(0,0,0,0.45)',
+  pill: '#D4553A',
+  text: '#FFFFFF',
+  textSecondary: 'rgba(255,255,255,0.75)',
+  textMuted: 'rgba(255,255,255,0.45)',
+  border: 'rgba(255,255,255,0.13)',
+  borderLight: 'rgba(255,255,255,0.07)',
+  xpGold: '#FFD166',
+  streakOrange: '#FF8C42',
+  levelPurple: '#C084FC',
+  kindGem: '#60A5FA',
+  kindGemLight: 'rgba(96,165,250,0.18)',
+  success: '#5ABF50',
+  error: '#FF6B6B',
+}
+
+const Fonts = {
+  heading: 'ChakraPetch_700Bold',
+  body: 'Schoolbell_400Regular',
+  fallback: 'System',
+  sizes: { xs: 11, sm: 13, md: 15, lg: 17, xl: 20, xxl: 26, xxxl: 34, hero: 52 },
+}
+
+const Radius = { sm: 6, md: 12, lg: 20, xl: 28, full: 999 }
+
+module.exports = { Colors, Fonts, Radius }
+```
+
+- [ ] **Step 2: Update `constants/theme.ts`** to import tokens from `tokens.js` instead of defining them inline
+
+```ts
+import { Colors, Fonts, Radius } from './tokens'
+
+export { Colors, Fonts, Radius }
+
+export const BG_GRADIENT = [Colors.gradientA, Colors.gradientB, Colors.gradientC] as const
+export const BG_GRADIENT_START = { x: 0, y: 0 }
+export const BG_GRADIENT_END = { x: 1, y: 1 }
+
+export const Shadow = {
+  sm: { shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.3, shadowRadius: 4, elevation: 2 },
+  md: { shadowColor: '#000', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.4, shadowRadius: 12, elevation: 5 },
+  lg: { shadowColor: Colors.primary, shadowOffset: { width: 0, height: 6 }, shadowOpacity: 0.4, shadowRadius: 16, elevation: 10 },
+}
+
+export const XP_PER_LEVEL = [0, 500, 1500, 3000, 5000, 8000, 12000, 17000, 23000, 30000]
+
+export const LEVEL_NAMES = [
+  'Recruit', 'Operative', 'Field Agent', 'Special Agent', 'Handler',
+  'Commander', 'Director', 'Chief', 'Legend', 'Guardian',
+]
+
+export function getLevelFromXP(xp: number): number {
+  for (let i = XP_PER_LEVEL.length - 1; i >= 0; i--) {
+    if (xp >= XP_PER_LEVEL[i]) return i + 1
+  }
+  return 1
+}
+
+export function getXPForNextLevel(level: number): number {
+  return XP_PER_LEVEL[level] ?? XP_PER_LEVEL[XP_PER_LEVEL.length - 1]
+}
+```
+
+- [ ] **Step 3: Create `tailwind.config.js`** (imports tokens from the single source of truth)
+
+```js
+const { Colors, Fonts, Radius } = require('./constants/tokens')
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -107,47 +196,47 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#5ABF50',
-        'primary-dark': '#3D9E34',
-        'primary-light': 'rgba(90,191,80,0.18)',
-        accent: '#D4553A',
-        'accent-light': 'rgba(212,85,58,0.18)',
-        background: '#0B1F0C',
-        surface: 'rgba(255,255,255,0.07)',
-        'surface-strong': 'rgba(255,255,255,0.13)',
-        'surface-alt': 'rgba(255,255,255,0.04)',
-        'surface-dark': 'rgba(0,0,0,0.45)',
-        secondary: 'rgba(255,255,255,0.75)',
-        muted: 'rgba(255,255,255,0.45)',
-        border: 'rgba(255,255,255,0.13)',
-        'border-light': 'rgba(255,255,255,0.07)',
-        'xp-gold': '#FFD166',
-        'streak-orange': '#FF8C42',
-        'level-purple': '#C084FC',
-        'kind-gem': '#60A5FA',
-        'kind-gem-light': 'rgba(96,165,250,0.18)',
-        error: '#FF6B6B',
+        primary: Colors.primary,
+        'primary-dark': Colors.primaryDark,
+        'primary-light': Colors.primaryLight,
+        accent: Colors.accent,
+        'accent-light': Colors.accentLight,
+        background: Colors.background,
+        surface: Colors.surface,
+        'surface-strong': Colors.surfaceStrong,
+        'surface-alt': Colors.surfaceAlt,
+        'surface-dark': Colors.surfaceDark,
+        secondary: Colors.textSecondary,
+        muted: Colors.textMuted,
+        border: Colors.border,
+        'border-light': Colors.borderLight,
+        'xp-gold': Colors.xpGold,
+        'streak-orange': Colors.streakOrange,
+        'level-purple': Colors.levelPurple,
+        'kind-gem': Colors.kindGem,
+        'kind-gem-light': Colors.kindGemLight,
+        error: Colors.error,
       },
       fontFamily: {
-        heading: ['ChakraPetch_700Bold'],
-        body: ['Schoolbell_400Regular'],
+        heading: [Fonts.heading],
+        body: [Fonts.body],
       },
       fontSize: {
-        xs: '11px',
-        sm: '13px',
-        md: '15px',
-        lg: '17px',
-        xl: '20px',
-        '2xl': '26px',
-        '3xl': '34px',
-        hero: '52px',
+        xs: `${Fonts.sizes.xs}px`,
+        sm: `${Fonts.sizes.sm}px`,
+        md: `${Fonts.sizes.md}px`,
+        lg: `${Fonts.sizes.lg}px`,
+        xl: `${Fonts.sizes.xl}px`,
+        '2xl': `${Fonts.sizes.xxl}px`,
+        '3xl': `${Fonts.sizes.xxxl}px`,
+        hero: `${Fonts.sizes.hero}px`,
       },
       borderRadius: {
-        sm: '6px',
-        md: '12px',
-        lg: '20px',
-        xl: '28px',
-        full: '9999px',
+        sm: `${Radius.sm}px`,
+        md: `${Radius.md}px`,
+        lg: `${Radius.lg}px`,
+        xl: `${Radius.xl}px`,
+        full: `${Radius.full}px`,
       },
     },
   },
@@ -155,7 +244,7 @@ module.exports = {
 }
 ```
 
-- [ ] **Step 2: Create `global.css`**
+- [ ] **Step 4: Create `global.css`**
 
 ```css
 @tailwind base;
@@ -163,17 +252,17 @@ module.exports = {
 @tailwind utilities;
 ```
 
-- [ ] **Step 3: Create `nativewind-env.d.ts`** (enables `className` prop on RN components in TypeScript)
+- [ ] **Step 5: Create `nativewind-env.d.ts`** (enables `className` prop on RN components in TypeScript)
 
 ```ts
 /// <reference types="nativewind/types" />
 ```
 
-- [ ] **Step 4: Commit**
+- [ ] **Step 6: Commit**
 
 ```bash
-git add tailwind.config.js global.css nativewind-env.d.ts
-git commit -m "chore: add tailwind config with brand tokens and nativewind types"
+git add constants/tokens.js constants/theme.ts tailwind.config.js global.css nativewind-env.d.ts
+git commit -m "chore: extract design tokens to single source of truth, wire tailwind config"
 ```
 
 ---
