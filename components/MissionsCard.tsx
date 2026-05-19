@@ -1,18 +1,18 @@
+import * as Haptics from "expo-haptics";
 import { useState } from "react";
 import {
-	View,
-	Text,
-	StyleSheet,
-	TouchableOpacity,
+	Alert,
 	Modal,
 	ScrollView,
-	Alert,
+	StyleSheet,
+	Text,
+	TouchableOpacity,
+	View,
 } from "react-native";
-import * as Haptics from "expo-haptics";
-import { useActionStore, Mission } from "@/store/actionStore";
-import { useAuthStore } from "@/store/authStore";
-import { Colors, Fonts, Radius, Shadow } from "@/constants/theme";
 import { S } from "@/constants/styles";
+import { Colors, Fonts, Radius, Shadow } from "@/constants/theme";
+import { type Mission, useActionStore } from "@/store/actionStore";
+import { useAuthStore } from "@/store/authStore";
 
 const DIFFICULTY_COLOR = {
 	easy: Colors.primary,

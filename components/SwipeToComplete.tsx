@@ -1,13 +1,13 @@
+import * as Haptics from "expo-haptics";
 import { useRef, useState } from "react";
 import {
-	View,
-	Text,
-	StyleSheet,
 	Animated,
-	PanResponder,
 	Dimensions,
+	PanResponder,
+	StyleSheet,
+	Text,
+	View,
 } from "react-native";
-import * as Haptics from "expo-haptics";
 import { Colors, Fonts, Radius } from "@/constants/theme";
 
 const TRACK_WIDTH = Dimensions.get("window").width - 40 - 48; // full width minus padding

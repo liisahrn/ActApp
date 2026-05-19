@@ -300,21 +300,17 @@ export const useActionStore = create<ActionState>((set, get) => ({
 		const t = today();
 
 		await Promise.all([
-			supabase
-				.from("completions")
-				.insert({
-					user_id: userId,
-					action_id: actionId,
-					streak_day: newStreakDay,
-				}),
-			supabase
-				.from("streaks")
-				.upsert({
-					user_id: userId,
-					current_streak: newStreakDay,
-					longest_streak: Math.max(newStreakDay, streak?.longest_streak ?? 0),
-					last_completion_date: t,
-				}),
+			supabase.from("completions").insert({
+				user_id: userId,
+				action_id: actionId,
+				streak_day: newStreakDay,
+			}),
+			supabase.from("streaks").upsert({
+				user_id: userId,
+				current_streak: newStreakDay,
+				longest_streak: Math.max(newStreakDay, streak?.longest_streak ?? 0),
+				last_completion_date: t,
+			}),
 		]);
 
 		const { data: profile } = await supabase

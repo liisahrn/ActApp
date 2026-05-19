@@ -1,20 +1,20 @@
+import { router } from "expo-router";
 import { useState } from "react";
 import {
-	View,
+	Alert,
+	KeyboardAvoidingView,
+	Platform,
+	ScrollView,
+	StyleSheet,
 	Text,
 	TextInput,
 	TouchableOpacity,
-	StyleSheet,
-	KeyboardAvoidingView,
-	Platform,
-	Alert,
-	ScrollView,
+	View,
 } from "react-native";
-import { router } from "expo-router";
-import { supabase } from "@/lib/supabase";
-import { Colors, Fonts, Radius, Shadow } from "@/constants/theme";
-import Background from "@/components/Background";
 import AppLogo from "@/components/AppLogo";
+import Background from "@/components/Background";
+import { Colors, Fonts, Radius, Shadow } from "@/constants/theme";
+import { supabase } from "@/lib/supabase";
 
 export default function AuthScreen() {
 	const [email, setEmail] = useState("");

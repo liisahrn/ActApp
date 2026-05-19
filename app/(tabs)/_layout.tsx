@@ -1,6 +1,6 @@
-import { Tabs } from "expo-router";
-import { View, Text, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { Tabs } from "expo-router";
+import { StyleSheet, Text, View } from "react-native";
 import { Colors, Fonts } from "@/constants/theme";
 
 function TabIcon({

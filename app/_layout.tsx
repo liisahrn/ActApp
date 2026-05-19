@@ -1,10 +1,10 @@
-import { useEffect } from "react";
+import { ChakraPetch_700Bold } from "@expo-google-fonts/chakra-petch";
+import { SchoolBell_400Regular } from "@expo-google-fonts/schoolbell";
+import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
+import { useEffect } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { useFonts } from "expo-font";
-import { SchoolBell_400Regular } from "@expo-google-fonts/schoolbell";
-import { ChakraPetch_700Bold } from "@expo-google-fonts/chakra-petch";
 import { supabase } from "@/lib/supabase";
 import { useAuthStore } from "@/store/authStore";
 

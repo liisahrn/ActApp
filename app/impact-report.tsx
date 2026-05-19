@@ -1,22 +1,22 @@
+import * as Haptics from "expo-haptics";
+import { Image } from "expo-image";
+import { router } from "expo-router";
 import { useEffect, useRef, useState } from "react";
 import {
-	View,
-	Text,
-	StyleSheet,
-	TouchableOpacity,
 	Animated,
 	ScrollView,
 	Share,
+	StyleSheet,
+	Text,
+	TouchableOpacity,
+	View,
 } from "react-native";
-import { router } from "expo-router";
-import * as Haptics from "expo-haptics";
-import { Image } from "expo-image";
+import Background from "@/components/Background";
+import { S } from "@/constants/styles";
+import { Colors, Fonts, Radius, Shadow } from "@/constants/theme";
 import { supabase } from "@/lib/supabase";
 import { useActionStore } from "@/store/actionStore";
 import { useAuthStore } from "@/store/authStore";
-import { Colors, Fonts, Radius, Shadow } from "@/constants/theme";
-import { S } from "@/constants/styles";
-import Background from "@/components/Background";
 
 type CountryRow = { country: string; completions: number };
 

@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import {
-	View,
-	Text,
-	StyleSheet,
 	FlatList,
-	TouchableOpacity,
+	StyleSheet,
+	Text,
 	TextInput,
+	TouchableOpacity,
+	View,
 } from "react-native";
+import Background from "@/components/Background";
+import { S } from "@/constants/styles";
+import { Colors, Fonts, Radius } from "@/constants/theme";
 import { supabase } from "@/lib/supabase";
 import { useAuthStore } from "@/store/authStore";
-import { Colors, Fonts, Radius } from "@/constants/theme";
-import { S } from "@/constants/styles";
-import Background from "@/components/Background";
 
 type LeaderboardUser = {
 	id: string;

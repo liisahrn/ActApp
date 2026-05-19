@@ -1,19 +1,19 @@
+import { router } from "expo-router";
 import { useState } from "react";
 import {
-	View,
+	Alert,
+	KeyboardAvoidingView,
+	Platform,
+	ScrollView,
+	StyleSheet,
 	Text,
 	TextInput,
 	TouchableOpacity,
-	StyleSheet,
-	KeyboardAvoidingView,
-	Platform,
-	Alert,
-	ScrollView,
+	View,
 } from "react-native";
-import { router } from "expo-router";
+import { Colors, Fonts, Radius, Shadow } from "@/constants/theme";
 import { supabase } from "@/lib/supabase";
 import { useAuthStore } from "@/store/authStore";
-import { Colors, Fonts, Radius, Shadow } from "@/constants/theme";
 
 const AVATARS = [
 	"🌱",

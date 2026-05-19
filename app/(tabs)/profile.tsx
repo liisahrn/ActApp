@@ -1,24 +1,24 @@
 import { useEffect, useState } from "react";
 import {
-	View,
-	Text,
-	StyleSheet,
-	ScrollView,
-	TouchableOpacity,
 	Alert,
+	ScrollView,
+	StyleSheet,
+	Text,
+	TouchableOpacity,
+	View,
 } from "react-native";
-import { supabase } from "@/lib/supabase";
-import { useAuthStore } from "@/store/authStore";
+import Background from "@/components/Background";
+import { S } from "@/constants/styles";
 import {
 	Colors,
 	Fonts,
+	LEVEL_NAMES,
 	Radius,
 	Shadow,
-	LEVEL_NAMES,
 	XP_PER_LEVEL,
 } from "@/constants/theme";
-import { S } from "@/constants/styles";
-import Background from "@/components/Background";
+import { supabase } from "@/lib/supabase";
+import { useAuthStore } from "@/store/authStore";
 
 type Badge = {
 	id: string;

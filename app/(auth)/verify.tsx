@@ -1,17 +1,17 @@
-import { useState, useRef } from "react";
+import { router, useLocalSearchParams } from "expo-router";
+import { useRef, useState } from "react";
 import {
-	View,
+	Alert,
+	KeyboardAvoidingView,
+	Platform,
+	StyleSheet,
 	Text,
 	TextInput,
 	TouchableOpacity,
-	StyleSheet,
-	KeyboardAvoidingView,
-	Platform,
-	Alert,
+	View,
 } from "react-native";
-import { router, useLocalSearchParams } from "expo-router";
-import { supabase } from "@/lib/supabase";
 import { Colors, Fonts, Radius, Shadow } from "@/constants/theme";
+import { supabase } from "@/lib/supabase";
 
 export default function VerifyScreen() {
 	const { email } = useLocalSearchParams<{ email: string }>();

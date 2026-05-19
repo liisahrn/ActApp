@@ -1,9 +1,9 @@
-import { StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { StyleSheet } from "react-native";
 import {
 	BG_GRADIENT,
-	BG_GRADIENT_START,
 	BG_GRADIENT_END,
+	BG_GRADIENT_START,
 } from "@/constants/theme";
 
 export default function Background() {

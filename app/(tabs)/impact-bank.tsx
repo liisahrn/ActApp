@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
-import { supabase } from "@/lib/supabase";
-import { useAuthStore } from "@/store/authStore";
-import { useActionStore } from "@/store/actionStore";
-import { Colors, Fonts, Radius, Shadow } from "@/constants/theme";
-import { S } from "@/constants/styles";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import Background from "@/components/Background";
 import MissionsCard from "@/components/MissionsCard";
+import { S } from "@/constants/styles";
+import { Colors, Fonts, Radius, Shadow } from "@/constants/theme";
+import { supabase } from "@/lib/supabase";
+import { useActionStore } from "@/store/actionStore";
+import { useAuthStore } from "@/store/authStore";
 
 type WeekRow = { week: string; co2: number; count: number };
 type CategoryRow = { category: string; count: number; co2: number };

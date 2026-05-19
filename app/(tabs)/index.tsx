@@ -1,14 +1,14 @@
-import { useEffect, useRef, useState } from "react";
-import { View, Text, StyleSheet, ScrollView, Animated } from "react-native";
-import { router } from "expo-router";
 import * as Haptics from "expo-haptics";
-import { useAuthStore } from "@/store/authStore";
-import { useActionStore } from "@/store/actionStore";
-import { Colors, Fonts, Radius, Shadow, LEVEL_NAMES } from "@/constants/theme";
-import { S } from "@/constants/styles";
+import { router } from "expo-router";
+import { useEffect, useRef, useState } from "react";
+import { Animated, ScrollView, StyleSheet, Text, View } from "react-native";
 import AppLogo from "@/components/AppLogo";
-import SwipeToComplete from "@/components/SwipeToComplete";
 import Background from "@/components/Background";
+import SwipeToComplete from "@/components/SwipeToComplete";
+import { S } from "@/constants/styles";
+import { Colors, Fonts, LEVEL_NAMES, Radius, Shadow } from "@/constants/theme";
+import { useActionStore } from "@/store/actionStore";
+import { useAuthStore } from "@/store/authStore";
 
 const CATEGORY_EMOJI: Record<string, string> = {
 	energy: "⚡",
