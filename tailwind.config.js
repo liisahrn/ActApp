@@ -30,6 +30,8 @@ module.exports = {
         'kind-gem': Colors.kindGem,
         'kind-gem-light': Colors.kindGemLight,
         error: Colors.error,
+        success: Colors.success,
+        text: Colors.text,
       },
       fontFamily: {
         heading: [Fonts.heading],
