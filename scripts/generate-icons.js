@@ -1,7 +1,7 @@
-const sharp = require('sharp')
-const path = require('path')
+const sharp = require("sharp");
+const path = require("path");
 
-const assetsDir = path.join(__dirname, '../assets')
+const assetsDir = path.join(__dirname, "../assets");
 
 // App icon SVG — 1024x1024, green gradient background, white leaf + wordmark
 const iconSVG = `
@@ -46,7 +46,7 @@ const iconSVG = `
     opacity="0.97"
     letter-spacing="-4">actapp</text>
 </svg>
-`
+`;
 
 // Splash screen SVG — 1284x2778 (iPhone 14 Pro Max), centered logo on light background
 const splashSVG = `
@@ -101,24 +101,26 @@ const splashSVG = `
     fill="#5A7A66"
     opacity="0.8">Small actions. Massive impact.</text>
 </svg>
-`
+`;
 
 async function generate() {
-  console.log('Generating app icon (1024x1024)...')
-  await sharp(Buffer.from(iconSVG))
-    .resize(1024, 1024)
-    .png()
-    .toFile(path.join(assetsDir, 'icon.png'))
-  console.log('✅ assets/icon.png')
+	console.log("Generating app icon (1024x1024)...");
+	await sharp(Buffer.from(iconSVG))
+		.resize(1024, 1024)
+		.png()
+		.toFile(path.join(assetsDir, "icon.png"));
+	console.log("✅ assets/icon.png");
 
-  console.log('Generating splash screen...')
-  await sharp(Buffer.from(splashSVG))
-    .resize(1284, 2778)
-    .png()
-    .toFile(path.join(assetsDir, 'splash-icon.png'))
-  console.log('✅ assets/splash-icon.png')
+	console.log("Generating splash screen...");
+	await sharp(Buffer.from(splashSVG))
+		.resize(1284, 2778)
+		.png()
+		.toFile(path.join(assetsDir, "splash-icon.png"));
+	console.log("✅ assets/splash-icon.png");
 
-  console.log('\n🌱 Icons generated! Restart the simulator to see the new app icon.')
+	console.log(
+		"\n🌱 Icons generated! Restart the simulator to see the new app icon.",
+	);
 }
 
-generate().catch(console.error)
+generate().catch(console.error);
