@@ -1,22 +1,26 @@
-import { Colors, Fonts, Radius } from './tokens'
+import { Colors, Fonts, Radius } from "./tokens";
 
-export { Colors, Fonts, Radius }
+export { Colors, Fonts, Radius };
 
 // Forest green gradient (top-left → bottom-right, like pitch deck)
-export const BG_GRADIENT = [Colors.gradientA, Colors.gradientB, Colors.gradientC] as const
-export const BG_GRADIENT_START = { x: 0, y: 0 }
-export const BG_GRADIENT_END = { x: 1, y: 1 }
+export const BG_GRADIENT = [
+	Colors.gradientA,
+	Colors.gradientB,
+	Colors.gradientC,
+] as const;
+export const BG_GRADIENT_START = { x: 0, y: 0 };
+export const BG_GRADIENT_END = { x: 1, y: 1 };
 
 export const Shadow = {
 	sm: {
-		shadowColor: '#000',
+		shadowColor: "#000",
 		shadowOffset: { width: 0, height: 1 },
 		shadowOpacity: 0.3,
 		shadowRadius: 4,
 		elevation: 2,
 	},
 	md: {
-		shadowColor: '#000',
+		shadowColor: "#000",
 		shadowOffset: { width: 0, height: 4 },
 		shadowOpacity: 0.4,
 		shadowRadius: 12,

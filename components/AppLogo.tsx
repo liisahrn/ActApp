@@ -1,16 +1,16 @@
-import { Text, View } from 'react-native'
-import { Fonts } from '@/constants/theme'
+import { Text, View } from "react-native";
+import { Fonts } from "@/constants/theme";
 
 type Props = {
-	size?: 'sm' | 'md' | 'lg'
-	showTagline?: boolean
-}
+	size?: "sm" | "md" | "lg";
+	showTagline?: boolean;
+};
 
-export default function AppLogo({ size = 'md', showTagline = false }: Props) {
-	const globeSize = size === 'sm' ? 32 : size === 'md' ? 50 : 70
-	const textSize = size === 'sm' ? 16 : size === 'md' ? 24 : 34
-	const overlap = Math.round(globeSize * 0.32)
-	const rowWidth = globeSize * 3 - overlap * 2
+export default function AppLogo({ size = "md", showTagline = false }: Props) {
+	const globeSize = size === "sm" ? 32 : size === "md" ? 50 : 70;
+	const textSize = size === "sm" ? 16 : size === "md" ? 24 : 34;
+	const overlap = Math.round(globeSize * 0.32);
+	const rowWidth = globeSize * 3 - overlap * 2;
 
 	return (
 		<View className="items-center gap-[14]">
@@ -48,9 +48,9 @@ export default function AppLogo({ size = 'md', showTagline = false }: Props) {
 						style={{
 							fontFamily: Fonts.heading,
 							fontSize: textSize,
-							color: '#FFFFFF',
+							color: "#FFFFFF",
 							letterSpacing: 2,
-							textShadowColor: 'rgba(0,0,0,0.95)',
+							textShadowColor: "rgba(0,0,0,0.95)",
 							textShadowOffset: { width: 0, height: 2 },
 							textShadowRadius: 6,
 						}}
@@ -63,11 +63,14 @@ export default function AppLogo({ size = 'md', showTagline = false }: Props) {
 			{/* Mission tagline pill */}
 			{showTagline && (
 				<View className="bg-accent rounded-full px-[18] py-2">
-					<Text className="font-body text-white text-xs" style={{ letterSpacing: 1.5 }}>
+					<Text
+						className="font-body text-white text-xs"
+						style={{ letterSpacing: 1.5 }}
+					>
 						ONE MISSION. EVERYONE. EVERY DAY.
 					</Text>
 				</View>
 			)}
 		</View>
-	)
+	);
 }

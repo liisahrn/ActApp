@@ -9,7 +9,6 @@ import { useAuthStore } from "@/store/authStore";
 export default function RootLayout() {
 	const { setSession, fetchProfile } = useAuthStore();
 
-
 	useEffect(() => {
 		supabase.auth.getSession().then(({ data: { session } }) => {
 			setSession(session);
