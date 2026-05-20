@@ -73,10 +73,13 @@ function MissionModal({
 	const t = new Date().toISOString().split("T")[0];
 	const alreadyLoggedToday = mission.last_logged_date === t;
 	const diffColor = DIFFICULTY_COLOR[mission.difficulty];
-	const accentColor = mission.gem_reward > 0 ? Colors.kindGem : Colors.primary;
+	const accentColor =
+		mission.gem_reward > 0 ? Colors.kindGem : Colors.primary;
 	const daysLeft = Math.max(
 		0,
-		Math.ceil((new Date(mission.end_date).getTime() - Date.now()) / 86400000),
+		Math.ceil(
+			(new Date(mission.end_date).getTime() - Date.now()) / 86400000,
+		),
 	);
 	const rewardText =
 		mission.xp_reward > 0
@@ -85,7 +88,12 @@ function MissionModal({
 	const pct = mission.pledged ? mission.count / mission.goal_count : 0;
 
 	return (
-		<Modal visible animationType="slide" transparent onRequestClose={onClose}>
+		<Modal
+			visible
+			animationType="slide"
+			transparent
+			onRequestClose={onClose}
+		>
 			<View
 				className="flex-1 justify-end"
 				style={{ backgroundColor: "rgba(0,0,0,0.65)" }}
@@ -110,7 +118,9 @@ function MissionModal({
 								<Text
 									style={{
 										fontSize: 44,
-										opacity: mission.pledged ? 0.4 + 0.6 * pct : 0.3,
+										opacity: mission.pledged
+											? 0.4 + 0.6 * pct
+											: 0.3,
 									}}
 								>
 									{mission.badge_emoji}
@@ -121,11 +131,13 @@ function MissionModal({
 											className="rounded-full px-2 py-[3] border"
 											style={{
 												backgroundColor:
-													mission.mission_type === "monthly"
+													mission.mission_type ===
+													"monthly"
 														? `${Colors.accent}22`
 														: `${Colors.primary}22`,
 												borderColor:
-													mission.mission_type === "monthly"
+													mission.mission_type ===
+													"monthly"
 														? Colors.accent
 														: Colors.primary,
 											}}
@@ -136,7 +148,8 @@ function MissionModal({
 													fontFamily: Fonts.heading,
 													letterSpacing: 0.5,
 													color:
-														mission.mission_type === "monthly"
+														mission.mission_type ===
+														"monthly"
 															? Colors.accent
 															: Colors.primary,
 												}}
@@ -169,7 +182,14 @@ function MissionModal({
 								onPress={onClose}
 								className="w-8 h-8 items-center justify-center"
 							>
-								<Text style={{ color: Colors.textMuted, fontSize: 18 }}>✕</Text>
+								<Text
+									style={{
+										color: Colors.textMuted,
+										fontSize: 18,
+									}}
+								>
+									✕
+								</Text>
 							</TouchableOpacity>
 						</View>
 
@@ -192,7 +212,9 @@ function MissionModal({
 							}}
 						>
 							<Text className="font-body text-muted text-xs mb-[6]">
-								{mission.completed ? "COMPLETED ✅" : "YOUR PLEDGE"}
+								{mission.completed
+									? "COMPLETED ✅"
+									: "YOUR PLEDGE"}
 							</Text>
 							<Text
 								className="font-body text-white text-md"
@@ -250,14 +272,19 @@ function MissionModal({
 
 					<View style={{ paddingTop: 16, gap: 10 }}>
 						{!mission.pledged && (
-							<PrimaryButton onPress={onPledge} label="Take the Pledge 🤝" />
+							<PrimaryButton
+								onPress={onPledge}
+								label="Take the Pledge 🤝"
+							/>
 						)}
 						{mission.pledged && !mission.completed && (
 							<PrimaryButton
 								onPress={onLog}
 								disabled={alreadyLoggedToday}
 								label={
-									alreadyLoggedToday ? "✅ Logged for today" : "Did it today ✓"
+									alreadyLoggedToday
+										? "✅ Logged for today"
+										: "Did it today ✓"
 								}
 							/>
 						)}
@@ -281,7 +308,9 @@ function MissionModal({
 							</View>
 						)}
 						<TouchableOpacity onPress={onClose} className="py-2">
-							<Text className="font-body text-muted text-center">Close</Text>
+							<Text className="font-body text-muted text-center">
+								Close
+							</Text>
 						</TouchableOpacity>
 					</View>
 				</View>
@@ -298,11 +327,14 @@ function MissionTile({
 	onPress: () => void;
 }) {
 	const diffColor = DIFFICULTY_COLOR[mission.difficulty];
-	const accentColor = mission.gem_reward > 0 ? Colors.kindGem : Colors.primary;
+	const accentColor =
+		mission.gem_reward > 0 ? Colors.kindGem : Colors.primary;
 	const pct = mission.pledged ? mission.count / mission.goal_count : 0;
 	const daysLeft = Math.max(
 		0,
-		Math.ceil((new Date(mission.end_date).getTime() - Date.now()) / 86400000),
+		Math.ceil(
+			(new Date(mission.end_date).getTime() - Date.now()) / 86400000,
+		),
 	);
 	const t = new Date().toISOString().split("T")[0];
 	const loggedToday = mission.last_logged_date === t;
@@ -328,7 +360,11 @@ function MissionTile({
 	else if (mission.completed)
 		statusEl = (
 			<Text
-				style={{ fontSize: 10, fontFamily: Fonts.body, color: Colors.xpGold }}
+				style={{
+					fontSize: 10,
+					fontFamily: Fonts.body,
+					color: Colors.xpGold,
+				}}
 			>
 				🎁 claim!
 			</Text>
@@ -336,7 +372,11 @@ function MissionTile({
 	else if (loggedToday)
 		statusEl = (
 			<Text
-				style={{ fontSize: 10, fontFamily: Fonts.body, color: Colors.primary }}
+				style={{
+					fontSize: 10,
+					fontFamily: Fonts.body,
+					color: Colors.primary,
+				}}
 			>
 				✓ logged today
 			</Text>
@@ -393,7 +433,9 @@ function MissionTile({
 			onPress={onPress}
 			activeOpacity={0.8}
 		>
-			<Text style={{ fontSize: 34, opacity: emojiOpacity, marginBottom: 6 }}>
+			<Text
+				style={{ fontSize: 34, opacity: emojiOpacity, marginBottom: 6 }}
+			>
 				{mission.badge_emoji}
 			</Text>
 			<Text
@@ -403,7 +445,10 @@ function MissionTile({
 			>
 				{mission.title}
 			</Text>
-			<Text className="font-body text-muted text-xs" style={{ marginTop: 3 }}>
+			<Text
+				className="font-body text-muted text-xs"
+				style={{ marginTop: 3 }}
+			>
 				{daysLeft}d left
 			</Text>
 
@@ -463,13 +508,16 @@ export default function MissionsCard() {
 	};
 	const handleClaim = async () => {
 		if (!userId || !selected) return;
-		await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+		await Haptics.notificationAsync(
+			Haptics.NotificationFeedbackType.Success,
+		);
 		const { xpEarned, gemsEarned } = await claimMissionReward(
 			userId,
 			selected.id,
 		);
 		syncSelected(selected.id);
-		const reward = xpEarned > 0 ? `+${xpEarned} XP ⭐` : `+${gemsEarned} 💎`;
+		const reward =
+			xpEarned > 0 ? `+${xpEarned} XP ⭐` : `+${gemsEarned} 💎`;
 		Alert.alert(
 			"Reward Claimed! 🎉",
 			`You earned ${reward} for completing this mission.`,

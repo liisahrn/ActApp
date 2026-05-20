@@ -184,7 +184,8 @@ export default function FriendsScreen() {
 		);
 	};
 
-	const data = activeTab === "friends" ? friendLeaderboard : globalLeaderboard;
+	const data =
+		activeTab === "friends" ? friendLeaderboard : globalLeaderboard;
 
 	return (
 		<View className="flex-1">
@@ -205,8 +206,13 @@ export default function FriendsScreen() {
 							className="flex-1 py-[10] rounded-md items-center border"
 							style={{
 								backgroundColor:
-									activeTab === tab ? Colors.primary : Colors.surface,
-								borderColor: activeTab === tab ? Colors.primary : Colors.border,
+									activeTab === tab
+										? Colors.primary
+										: Colors.surface,
+								borderColor:
+									activeTab === tab
+										? Colors.primary
+										: Colors.border,
 							}}
 							onPress={() => {
 								setActiveTab(tab);
@@ -216,12 +222,20 @@ export default function FriendsScreen() {
 						>
 							<Text
 								style={{
-									fontFamily: activeTab === tab ? Fonts.heading : Fonts.body,
+									fontFamily:
+										activeTab === tab
+											? Fonts.heading
+											: Fonts.body,
 									fontSize: 13,
-									color: activeTab === tab ? "#fff" : Colors.textMuted,
+									color:
+										activeTab === tab
+											? "#fff"
+											: Colors.textMuted,
 								}}
 							>
-								{tab === "friends" ? "👥 My Squad" : "🌍 Global Ops"}
+								{tab === "friends"
+									? "👥 My Squad"
+									: "🌍 Global Ops"}
 							</Text>
 						</TouchableOpacity>
 					))}
@@ -250,15 +264,23 @@ export default function FriendsScreen() {
 							key={item.id}
 							className="flex-row items-center gap-[10] p-3 border-b border-border-light"
 						>
-							<Text style={{ fontSize: 24 }}>{item.avatar_url}</Text>
+							<Text style={{ fontSize: 24 }}>
+								{item.avatar_url}
+							</Text>
 							<View className="flex-1">
-								<Heading className="text-md">{item.username}</Heading>
+								<Heading className="text-md">
+									{item.username}
+								</Heading>
 								<MutedText className="text-xs">
 									Lv.{item.level} · ⭐{item.xp}
 								</MutedText>
 							</View>
 							<PillButton
-								label={following.has(item.id) ? "Following" : "Follow"}
+								label={
+									following.has(item.id)
+										? "Following"
+										: "Follow"
+								}
 								outlined={following.has(item.id)}
 								onPress={() => toggleFollow(item.id)}
 							/>
@@ -275,7 +297,11 @@ export default function FriendsScreen() {
 				ListEmptyComponent={
 					<EmptyState
 						emoji={activeTab === "friends" ? "👥" : "🌍"}
-						title={activeTab === "friends" ? "No agents yet!" : "No data yet"}
+						title={
+							activeTab === "friends"
+								? "No agents yet!"
+								: "No data yet"
+						}
 						hint={
 							activeTab === "friends"
 								? "Search above to find and follow fellow agents."

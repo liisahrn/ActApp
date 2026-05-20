@@ -78,10 +78,17 @@ export default function TodayScreen() {
 	};
 
 	const handleComplete = async () => {
-		if (!session?.user?.id || !todaysAction || hasCompletedToday || completing)
+		if (
+			!session?.user?.id ||
+			!todaysAction ||
+			hasCompletedToday ||
+			completing
+		)
 			return;
 		setCompleting(true);
-		await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+		await Haptics.notificationAsync(
+			Haptics.NotificationFeedbackType.Success,
+		);
 		await completeAction(session.user.id, todaysAction.id);
 		setJustCompleted(true);
 		popAnimation(xpOpacity, xpY);
@@ -98,15 +105,22 @@ export default function TodayScreen() {
 		)
 			return;
 		setCompletingComm(true);
-		await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-		await completeCommunityAction(session.user.id, todaysCommunityAction.id);
+		await Haptics.notificationAsync(
+			Haptics.NotificationFeedbackType.Success,
+		);
+		await completeCommunityAction(
+			session.user.id,
+			todaysCommunityAction.id,
+		);
 		setJustCompletedComm(true);
 		popAnimation(gemOpacity, gemY);
 		setCompletingComm(false);
 	};
 
 	const levelName =
-		LEVEL_NAMES[Math.min((profile?.level ?? 1) - 1, LEVEL_NAMES.length - 1)];
+		LEVEL_NAMES[
+			Math.min((profile?.level ?? 1) - 1, LEVEL_NAMES.length - 1)
+		];
 	const isCarbon = hasCompletedToday || justCompleted;
 	const isCommunity = hasCompletedCommunityToday || justCompletedComm;
 
@@ -177,7 +191,9 @@ export default function TodayScreen() {
 					<View className="flex-row items-center gap-3">
 						<View
 							className="flex-row items-center gap-[6] rounded-full px-[14] py-2"
-							style={{ backgroundColor: `${Colors.streakOrange}28` }}
+							style={{
+								backgroundColor: `${Colors.streakOrange}28`,
+							}}
 						>
 							<Text style={{ fontSize: 18 }}>🔥</Text>
 							<Text
@@ -203,7 +219,9 @@ export default function TodayScreen() {
 				</View>
 
 				{/* Daily Mission */}
-				<View style={{ paddingHorizontal: 20, paddingTop: 20, gap: 12 }}>
+				<View
+					style={{ paddingHorizontal: 20, paddingTop: 20, gap: 12 }}
+				>
 					<SectionTitle>🌍 Daily Mission</SectionTitle>
 					{loading ? (
 						<View
@@ -219,18 +237,23 @@ export default function TodayScreen() {
 									padding: 22,
 									gap: 12,
 									borderWidth: isCarbon ? 1.5 : 1,
-									borderColor: isCarbon ? Colors.primary : Colors.border,
+									borderColor: isCarbon
+										? Colors.primary
+										: Colors.border,
 								},
 								Shadow.md,
 							]}
 						>
 							<View className="flex-row items-center justify-between">
 								<Text style={{ fontSize: 40 }}>
-									{CATEGORY_EMOJI[todaysAction.category] ?? "🌍"}
+									{CATEGORY_EMOJI[todaysAction.category] ??
+										"🌍"}
 								</Text>
 								<View
 									className="rounded-full px-3 py-1"
-									style={{ backgroundColor: Colors.primaryLight }}
+									style={{
+										backgroundColor: Colors.primaryLight,
+									}}
 								>
 									<Text
 										style={{
@@ -245,21 +268,32 @@ export default function TodayScreen() {
 									</Text>
 								</View>
 							</View>
-							<Heading className="text-2xl" style={{ lineHeight: 30 }}>
+							<Heading
+								className="text-2xl"
+								style={{ lineHeight: 30 }}
+							>
 								{todaysAction.title}
 							</Heading>
-							<BodyText className="text-md" style={{ lineHeight: 22 }}>
+							<BodyText
+								className="text-md"
+								style={{ lineHeight: 22 }}
+							>
 								{todaysAction.description}
 							</BodyText>
 							<View className="flex-row justify-between bg-surface rounded-md p-3">
-								<MutedText className="text-sm">Impact per person</MutedText>
+								<MutedText className="text-sm">
+									Impact per person
+								</MutedText>
 								<Heading className="text-sm text-primary">
 									{todaysAction.co2_equivalent > 0
 										? `~${todaysAction.co2_equivalent}kg CO₂`
 										: todaysAction.impact_unit}
 								</Heading>
 							</View>
-							<View className="items-center" style={{ marginTop: 4 }}>
+							<View
+								className="items-center"
+								style={{ marginTop: 4 }}
+							>
 								<SwipeToComplete
 									onComplete={handleComplete}
 									disabled={isCarbon || completing}
@@ -291,7 +325,13 @@ export default function TodayScreen() {
 
 				{/* Community Op */}
 				{(todaysCommunityAction || loading) && (
-					<View style={{ paddingHorizontal: 20, paddingTop: 20, gap: 12 }}>
+					<View
+						style={{
+							paddingHorizontal: 20,
+							paddingTop: 20,
+							gap: 12,
+						}}
+					>
 						<SectionTitle>💎 Community Op</SectionTitle>
 						{loading ? (
 							<View
@@ -319,7 +359,8 @@ export default function TodayScreen() {
 									<View
 										className="rounded-full px-3 py-1 border"
 										style={{
-											backgroundColor: Colors.kindGemLight,
+											backgroundColor:
+												Colors.kindGemLight,
 											borderColor: `${Colors.kindGem}50`,
 										}}
 									>
@@ -330,17 +371,27 @@ export default function TodayScreen() {
 												color: Colors.kindGem,
 											}}
 										>
-											+{todaysCommunityAction?.gem_reward} 💎
+											+{todaysCommunityAction?.gem_reward}{" "}
+											💎
 										</Text>
 									</View>
 								</View>
-								<Heading className="text-xl" style={{ lineHeight: 26 }}>
+								<Heading
+									className="text-xl"
+									style={{ lineHeight: 26 }}
+								>
 									{todaysCommunityAction?.title}
 								</Heading>
-								<BodyText className="text-md" style={{ lineHeight: 22 }}>
+								<BodyText
+									className="text-md"
+									style={{ lineHeight: 22 }}
+								>
 									{todaysCommunityAction?.description}
 								</BodyText>
-								<View className="items-center" style={{ marginTop: 4 }}>
+								<View
+									className="items-center"
+									style={{ marginTop: 4 }}
+								>
 									<SwipeToComplete
 										onComplete={handleCompleteComm}
 										disabled={isCommunity || completingComm}
@@ -353,11 +404,14 @@ export default function TodayScreen() {
 												fontSize: 20,
 												fontFamily: Fonts.heading,
 												opacity: gemOpacity,
-												transform: [{ translateY: gemY }],
+												transform: [
+													{ translateY: gemY },
+												],
 												color: Colors.kindGem,
 											}}
 										>
-											+{todaysCommunityAction?.gem_reward} 💎
+											+{todaysCommunityAction?.gem_reward}{" "}
+											💎
 										</Animated.Text>
 									)}
 								</View>
@@ -375,9 +429,12 @@ export default function TodayScreen() {
 					}}
 				>
 					<Text style={{ fontSize: 22, marginTop: 1 }}>💡</Text>
-					<BodyText className="flex-1 text-sm" style={{ lineHeight: 20 }}>
-						Every mission you complete is multiplied by every agent doing the
-						same. You're never operating alone.
+					<BodyText
+						className="flex-1 text-sm"
+						style={{ lineHeight: 20 }}
+					>
+						Every mission you complete is multiplied by every agent
+						doing the same. You're never operating alone.
 					</BodyText>
 				</View>
 			</ScrollView>

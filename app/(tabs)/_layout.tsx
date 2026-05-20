@@ -14,7 +14,9 @@ function TabIcon({
 }) {
 	return (
 		<View className="items-center gap-[3] w-[72]">
-			<Text style={{ fontSize: 24, opacity: focused ? 1 : 0.38 }}>{emoji}</Text>
+			<Text style={{ fontSize: 24, opacity: focused ? 1 : 0.38 }}>
+				{emoji}
+			</Text>
 			<Text
 				style={{
 					fontFamily: focused ? Fonts.heading : Fonts.body,

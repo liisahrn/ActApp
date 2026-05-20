@@ -138,7 +138,11 @@ export default function AuthScreen() {
 						onPress={handleAuth}
 						disabled={loading}
 						label={
-							loading ? "Loading…" : isSignUp ? "Create account →" : "Sign in →"
+							loading
+								? "Loading…"
+								: isSignUp
+									? "Create account →"
+									: "Sign in →"
 						}
 						className="tracking-[1]"
 					/>

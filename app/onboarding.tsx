@@ -68,7 +68,10 @@ export default function OnboardingScreen() {
 				.neq("id", user.id)
 				.maybeSingle();
 			if (existing) {
-				Alert.alert("Taken!", "That username is already in use. Try another.");
+				Alert.alert(
+					"Taken!",
+					"That username is already in use. Try another.",
+				);
 				return;
 			}
 			const { error } = await supabase.from("profiles").upsert({
@@ -111,7 +114,10 @@ export default function OnboardingScreen() {
 					<Text style={{ fontSize: 72, marginBottom: 4 }}>
 						{selectedAvatar}
 					</Text>
-					<Text className="text-white text-2xl" style={{ fontWeight: "800" }}>
+					<Text
+						className="text-white text-2xl"
+						style={{ fontWeight: "800" }}
+					>
 						Set up your profile
 					</Text>
 					<Text className="text-secondary text-md">
@@ -126,10 +132,15 @@ export default function OnboardingScreen() {
 							className="w-14 h-14 items-center justify-center rounded-md border"
 							style={{
 								backgroundColor:
-									selectedAvatar === emoji ? Colors.surfaceAlt : Colors.surface,
-								borderWidth: selectedAvatar === emoji ? 2.5 : 1.5,
+									selectedAvatar === emoji
+										? Colors.surfaceAlt
+										: Colors.surface,
+								borderWidth:
+									selectedAvatar === emoji ? 2.5 : 1.5,
 								borderColor:
-									selectedAvatar === emoji ? Colors.primary : Colors.border,
+									selectedAvatar === emoji
+										? Colors.primary
+										: Colors.border,
 							}}
 							onPress={() => setSelectedAvatar(emoji)}
 							activeOpacity={0.75}
@@ -158,7 +169,10 @@ export default function OnboardingScreen() {
 							Shadow.sm,
 						]}
 					>
-						<Text className="text-secondary text-lg" style={{ marginRight: 4 }}>
+						<Text
+							className="text-secondary text-lg"
+							style={{ marginRight: 4 }}
+						>
 							@
 						</Text>
 						<AppTextInput

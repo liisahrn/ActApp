@@ -137,7 +137,10 @@ export const useActionStore = create<ActionState>((set, get) => ({
 			.eq("user_id", userId)
 			.single();
 		if (data)
-			set({ streak: data, hasCompletedToday: data.last_completion_date === t });
+			set({
+				streak: data,
+				hasCompletedToday: data.last_completion_date === t,
+			});
 
 		const { data: communityAction } = await supabase
 			.from("actions")
@@ -159,16 +162,21 @@ export const useActionStore = create<ActionState>((set, get) => ({
 
 	fetchMissions: async (userId: string) => {
 		const t = today();
-		const [{ data: missionRows }, { data: pledgeRows }] = await Promise.all([
-			supabase
-				.from("missions")
-				.select("*")
-				.lte("start_date", t)
-				.gte("end_date", t)
-				.order("mission_type")
-				.order("created_at"),
-			supabase.from("user_missions").select("*").eq("user_id", userId),
-		]);
+		const [{ data: missionRows }, { data: pledgeRows }] = await Promise.all(
+			[
+				supabase
+					.from("missions")
+					.select("*")
+					.lte("start_date", t)
+					.gte("end_date", t)
+					.order("mission_type")
+					.order("created_at"),
+				supabase
+					.from("user_missions")
+					.select("*")
+					.eq("user_id", userId),
+			],
+		);
 		if (!missionRows) return;
 		const pledgeMap: Record<
 			string,
@@ -280,7 +288,10 @@ export const useActionStore = create<ActionState>((set, get) => ({
 			if (profile) {
 				await supabase
 					.from("profiles")
-					.update({ kind_gems: (profile.kind_gems ?? 0) + mission.gem_reward })
+					.update({
+						kind_gems:
+							(profile.kind_gems ?? 0) + mission.gem_reward,
+					})
 					.eq("id", userId);
 			}
 		}
@@ -308,7 +319,10 @@ export const useActionStore = create<ActionState>((set, get) => ({
 			supabase.from("streaks").upsert({
 				user_id: userId,
 				current_streak: newStreakDay,
-				longest_streak: Math.max(newStreakDay, streak?.longest_streak ?? 0),
+				longest_streak: Math.max(
+					newStreakDay,
+					streak?.longest_streak ?? 0,
+				),
 				last_completion_date: t,
 			}),
 		]);
@@ -330,7 +344,10 @@ export const useActionStore = create<ActionState>((set, get) => ({
 			hasCompletedToday: true,
 			streak: {
 				current_streak: newStreakDay,
-				longest_streak: Math.max(newStreakDay, streak?.longest_streak ?? 0),
+				longest_streak: Math.max(
+					newStreakDay,
+					streak?.longest_streak ?? 0,
+				),
 				last_completion_date: t,
 			},
 		});

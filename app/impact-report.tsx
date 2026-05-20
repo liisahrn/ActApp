@@ -155,7 +155,13 @@ export default function ImpactReportScreen() {
 					}}
 					onPress={() => router.back()}
 				>
-					<Text style={{ color: "#fff", fontSize: 16, fontWeight: "700" }}>
+					<Text
+						style={{
+							color: "#fff",
+							fontSize: 16,
+							fontWeight: "700",
+						}}
+					>
 						✕
 					</Text>
 				</TouchableOpacity>
@@ -170,10 +176,18 @@ export default function ImpactReportScreen() {
 					{/* Header card */}
 					<View
 						className="rounded-xl p-[22] gap-[10] items-center border border-border"
-						style={[{ backgroundColor: Colors.surfaceDark }, Shadow.md]}
+						style={[
+							{ backgroundColor: Colors.surfaceDark },
+							Shadow.md,
+						]}
 					>
-						<PillBadge label="MISSION COMPLETE" className="self-center" />
-						<Heading className="text-3xl text-center">Mission Debrief</Heading>
+						<PillBadge
+							label="MISSION COMPLETE"
+							className="self-center"
+						/>
+						<Heading className="text-3xl text-center">
+							Mission Debrief
+						</Heading>
 						<MutedText className="text-sm">
 							{new Date().toDateString()}
 						</MutedText>
@@ -269,11 +283,21 @@ export default function ImpactReportScreen() {
 										style={{
 											width: "47.5%",
 											backgroundColor: Colors.surfaceDark,
-											opacity: showEquiv ? equivAnims[i] : 0,
-											transform: [{ scale: showEquiv ? equivAnims[i] : 0 }],
+											opacity: showEquiv
+												? equivAnims[i]
+												: 0,
+											transform: [
+												{
+													scale: showEquiv
+														? equivAnims[i]
+														: 0,
+												},
+											],
 										}}
 									>
-										<Text style={{ fontSize: 28 }}>{eq.emoji}</Text>
+										<Text style={{ fontSize: 28 }}>
+											{eq.emoji}
+										</Text>
 										<Text
 											style={{
 												fontSize: 26,
@@ -315,7 +339,9 @@ export default function ImpactReportScreen() {
 							className="rounded-xl p-[18] border border-border"
 							style={{ backgroundColor: Colors.surfaceDark }}
 						>
-							<SectionTitle className="mb-[14]">🌐 By country</SectionTitle>
+							<SectionTitle className="mb-[14]">
+								🌐 By country
+							</SectionTitle>
 							{countries.map((row, i) => (
 								<View
 									key={row.country}
@@ -333,8 +359,13 @@ export default function ImpactReportScreen() {
 									>
 										{i + 1}
 									</Text>
-									<Text style={{ fontSize: 20 }}>{toFlag(row.country)}</Text>
-									<BodyText className="flex-1 text-sm" numberOfLines={1}>
+									<Text style={{ fontSize: 20 }}>
+										{toFlag(row.country)}
+									</Text>
+									<BodyText
+										className="flex-1 text-sm"
+										numberOfLines={1}
+									>
 										{row.country}
 									</BodyText>
 									<View
@@ -388,15 +419,19 @@ export default function ImpactReportScreen() {
 								lineHeight: 20,
 							}}
 						>
-							⭐ +XP earned · 🔥 Streak active · Agent {profile?.username ?? ""}{" "}
-							— mission logged
+							⭐ +XP earned · 🔥 Streak active · Agent{" "}
+							{profile?.username ?? ""} — mission logged
 						</Text>
 					</View>
 
-					<PrimaryButton onPress={handleShare} label="Share your mission 🌍" />
+					<PrimaryButton
+						onPress={handleShare}
+						label="Share your mission 🌍"
+					/>
 
 					<MutedText className="text-center text-sm">
-						Mission logged. Agent, stand by for tomorrow's briefing. 🌱
+						Mission logged. Agent, stand by for tomorrow's briefing.
+						🌱
 					</MutedText>
 				</Animated.View>
 			</ScrollView>

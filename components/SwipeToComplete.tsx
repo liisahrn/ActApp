@@ -26,8 +26,10 @@ export default function SwipeToComplete({
 
 	const panResponder = useRef(
 		PanResponder.create({
-			onStartShouldSetPanResponder: () => !disabled && !hasTriggered.current,
-			onMoveShouldSetPanResponder: () => !disabled && !hasTriggered.current,
+			onStartShouldSetPanResponder: () =>
+				!disabled && !hasTriggered.current,
+			onMoveShouldSetPanResponder: () =>
+				!disabled && !hasTriggered.current,
 			onPanResponderMove: (_, { dx }) => {
 				const clamped = Math.max(0, Math.min(dx, MAX_SLIDE));
 				translateX.setValue(clamped);
@@ -35,7 +37,9 @@ export default function SwipeToComplete({
 			onPanResponderRelease: (_, { dx }) => {
 				if (dx >= THRESHOLD && !hasTriggered.current) {
 					hasTriggered.current = true;
-					Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+					Haptics.notificationAsync(
+						Haptics.NotificationFeedbackType.Success,
+					);
 					Animated.spring(translateX, {
 						toValue: MAX_SLIDE,
 						useNativeDriver: true,
@@ -115,7 +119,10 @@ export default function SwipeToComplete({
 					backgroundColor: thumbColor,
 					borderRadius: Radius.full,
 					opacity: 0.2,
-					transform: [{ translateX: fillTranslateX }, { scaleX: fillScale }],
+					transform: [
+						{ translateX: fillTranslateX },
+						{ scaleX: fillScale },
+					],
 				}}
 			/>
 			<Animated.Text
@@ -149,7 +156,9 @@ export default function SwipeToComplete({
 				}}
 				{...panResponder.panHandlers}
 			>
-				<Text style={{ fontSize: 22, color: "#fff", fontWeight: "700" }}>
+				<Text
+					style={{ fontSize: 22, color: "#fff", fontWeight: "700" }}
+				>
 					→
 				</Text>
 			</Animated.View>

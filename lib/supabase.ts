@@ -7,7 +7,8 @@ const supabaseAnonKey = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY!;
 
 const ExpoSecureStoreAdapter = {
 	getItem: (key: string) => SecureStore.getItemAsync(key),
-	setItem: (key: string, value: string) => SecureStore.setItemAsync(key, value),
+	setItem: (key: string, value: string) =>
+		SecureStore.setItemAsync(key, value),
 	removeItem: (key: string) => SecureStore.deleteItemAsync(key),
 };
 

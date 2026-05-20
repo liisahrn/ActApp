@@ -36,7 +36,10 @@ export default function RootLayout() {
 				<Stack.Screen name="(tabs)" />
 				<Stack.Screen
 					name="impact-report"
-					options={{ presentation: "modal", animation: "slide_from_bottom" }}
+					options={{
+						presentation: "modal",
+						animation: "slide_from_bottom",
+					}}
 				/>
 			</Stack>
 		</GestureHandlerRootView>

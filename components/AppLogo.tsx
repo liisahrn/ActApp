@@ -21,7 +21,11 @@ export default function AppLogo({ size = "md", showTagline = false }: Props) {
 			>
 				{/* Three overlapping globes */}
 				<View className="flex-row items-center absolute">
-					<Text style={{ fontSize: globeSize, lineHeight: globeSize }}>🌍</Text>
+					<Text
+						style={{ fontSize: globeSize, lineHeight: globeSize }}
+					>
+						🌍
+					</Text>
 					<Text
 						style={{
 							fontSize: globeSize,

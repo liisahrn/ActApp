@@ -56,7 +56,10 @@ export default function VerifyScreen() {
 					className="absolute top-[60] left-7"
 					onPress={() => router.back()}
 				>
-					<Text className="text-primary text-md" style={{ fontWeight: "600" }}>
+					<Text
+						className="text-primary text-md"
+						style={{ fontWeight: "600" }}
+					>
 						← Back
 					</Text>
 				</TouchableOpacity>
@@ -95,9 +98,12 @@ export default function VerifyScreen() {
 										height: 58,
 										borderRadius: Radius.md,
 										backgroundColor: Colors.surface,
-										borderWidth: code.length === i ? 2 : 1.5,
+										borderWidth:
+											code.length === i ? 2 : 1.5,
 										borderColor:
-											code.length === i ? Colors.primary : Colors.border,
+											code.length === i
+												? Colors.primary
+												: Colors.border,
 									},
 									Shadow.sm,
 								]}
@@ -119,10 +125,17 @@ export default function VerifyScreen() {
 				<TextInput
 					ref={inputRef}
 					value={code}
-					onChangeText={(t) => setCode(t.replace(/\D/g, "").slice(0, 6))}
+					onChangeText={(t) =>
+						setCode(t.replace(/\D/g, "").slice(0, 6))
+					}
 					keyboardType="number-pad"
 					maxLength={6}
-					style={{ position: "absolute", opacity: 0, height: 0, width: 0 }}
+					style={{
+						position: "absolute",
+						opacity: 0,
+						height: 0,
+						width: 0,
+					}}
 					autoFocus
 				/>
 
@@ -132,8 +145,14 @@ export default function VerifyScreen() {
 					label={loading ? "Verifying…" : "Verify →"}
 				/>
 
-				<TouchableOpacity onPress={handleResend} className="items-center">
-					<Text className="text-primary text-sm" style={{ fontWeight: "600" }}>
+				<TouchableOpacity
+					onPress={handleResend}
+					className="items-center"
+				>
+					<Text
+						className="text-primary text-sm"
+						style={{ fontWeight: "600" }}
+					>
 						Didn't get it? Resend code
 					</Text>
 				</TouchableOpacity>

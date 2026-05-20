@@ -72,7 +72,11 @@ export default function ImpactBankScreen() {
 			.select("action_id, completed_at")
 			.eq("user_id", userId)
 			.order("completed_at", { ascending: false });
-		if (completionsError) { console.error("fetchImpact completions:", completionsError.message); setLoading(false); return; }
+		if (completionsError) {
+			console.error("fetchImpact completions:", completionsError.message);
+			setLoading(false);
+			return;
+		}
 		if (!completionRows?.length) {
 			setLoading(false);
 			return;
@@ -82,7 +86,11 @@ export default function ImpactBankScreen() {
 			.from("actions")
 			.select("id, co2_equivalent, category, action_type")
 			.in("id", actionIds);
-		if (actionsError) { console.error("fetchImpact actions:", actionsError.message); setLoading(false); return; }
+		if (actionsError) {
+			console.error("fetchImpact actions:", actionsError.message);
+			setLoading(false);
+			return;
+		}
 		const actionMap: Record<
 			string,
 			{ co2_equivalent: number; category: string; action_type: string }
@@ -184,7 +192,13 @@ export default function ImpactBankScreen() {
 				</View>
 
 				{totalCO2 > 0 && (
-					<View style={{ paddingHorizontal: 20, paddingTop: 24, gap: 12 }}>
+					<View
+						style={{
+							paddingHorizontal: 20,
+							paddingTop: 24,
+							gap: 12,
+						}}
+					>
 						<SectionTitle>That's the same as…</SectionTitle>
 						<View className="flex-row flex-wrap gap-2">
 							{equivalents.map((eq) => (
@@ -196,7 +210,9 @@ export default function ImpactBankScreen() {
 										backgroundColor: Colors.surfaceDark,
 									}}
 								>
-									<Text style={{ fontSize: 26 }}>{eq.emoji}</Text>
+									<Text style={{ fontSize: 26 }}>
+										{eq.emoji}
+									</Text>
 									<Text
 										style={{
 											fontSize: 20,
@@ -224,7 +240,13 @@ export default function ImpactBankScreen() {
 				)}
 
 				{weeks.length > 0 && (
-					<View style={{ paddingHorizontal: 20, paddingTop: 24, gap: 12 }}>
+					<View
+						style={{
+							paddingHorizontal: 20,
+							paddingTop: 24,
+							gap: 12,
+						}}
+					>
 						<SectionTitle>Week by week</SectionTitle>
 						<View
 							className="flex-row items-end gap-[6]"
@@ -283,11 +305,20 @@ export default function ImpactBankScreen() {
 				)}
 
 				{categories.length > 0 && (
-					<View style={{ paddingHorizontal: 20, paddingTop: 24, gap: 12 }}>
+					<View
+						style={{
+							paddingHorizontal: 20,
+							paddingTop: 24,
+							gap: 12,
+						}}
+					>
 						<SectionTitle>By category</SectionTitle>
 						<View style={{ gap: 10 }}>
 							{categories.map((c) => (
-								<View key={c.category} className="flex-row items-center gap-2">
+								<View
+									key={c.category}
+									className="flex-row items-center gap-2"
+								>
 									<Text style={{ fontSize: 22, width: 30 }}>
 										{CATEGORY_EMOJI[c.category] ?? "🌍"}
 									</Text>

@@ -72,7 +72,8 @@ export default function ProfileScreen() {
 			.select("current_streak, longest_streak")
 			.eq("user_id", userId)
 			.maybeSingle();
-		if (s) setStreak({ current: s.current_streak, longest: s.longest_streak });
+		if (s)
+			setStreak({ current: s.current_streak, longest: s.longest_streak });
 		const { count } = await supabase
 			.from("completions")
 			.select("*", { count: "exact", head: true })
@@ -92,8 +93,10 @@ export default function ProfileScreen() {
 				);
 			setCO2(
 				Math.round(
-					(actions?.reduce((sum, a) => sum + (a.co2_equivalent ?? 0), 0) ?? 0) *
-						10,
+					(actions?.reduce(
+						(sum, a) => sum + (a.co2_equivalent ?? 0),
+						0,
+					) ?? 0) * 10,
 				) / 10,
 			);
 		}
@@ -169,17 +172,25 @@ export default function ProfileScreen() {
 
 				<View className="flex-row gap-2 px-5 mt-1">
 					{STATS.map((s) => (
-						<Card key={s.label} className="flex-1 p-3 items-center gap-1">
+						<Card
+							key={s.label}
+							className="flex-1 p-3 items-center gap-1"
+						>
 							<Text style={{ fontSize: 20 }}>{s.emoji}</Text>
 							<Heading className="text-lg">{s.value}</Heading>
-							<MutedText className="text-[10] text-center">{s.label}</MutedText>
+							<MutedText className="text-[10] text-center">
+								{s.label}
+							</MutedText>
 						</Card>
 					))}
 				</View>
 
 				<View className="p-5 gap-[14]">
 					<SectionTitle>
-						Badges {earnedBadges.length > 0 ? `(${earnedBadges.length})` : ""}
+						Badges{" "}
+						{earnedBadges.length > 0
+							? `(${earnedBadges.length})`
+							: ""}
 					</SectionTitle>
 					{badges.length === 0 ? (
 						<EmptyState
@@ -197,8 +208,12 @@ export default function ProfileScreen() {
 										className="p-3 items-center gap-1"
 										style={{ width: "30%" }}
 									>
-										<Text style={{ fontSize: 32 }}>{b.image_url ?? "🎖️"}</Text>
-										<Heading className="text-xs text-center">{b.name}</Heading>
+										<Text style={{ fontSize: 32 }}>
+											{b.image_url ?? "🎖️"}
+										</Text>
+										<Heading className="text-xs text-center">
+											{b.name}
+										</Heading>
 										<MutedText
 											className="text-[10] text-center"
 											style={{ lineHeight: 14 }}
@@ -210,7 +225,9 @@ export default function ProfileScreen() {
 							</View>
 							{lockedBadges.length > 0 && (
 								<>
-									<MutedText className="text-sm mt-1">Locked</MutedText>
+									<MutedText className="text-sm mt-1">
+										Locked
+									</MutedText>
 									<View className="flex-row flex-wrap gap-[10]">
 										{lockedBadges.map((b) => (
 											<Card
@@ -218,7 +235,14 @@ export default function ProfileScreen() {
 												className="p-3 items-center gap-1 opacity-45"
 												style={{ width: "30%" }}
 											>
-												<Text style={{ fontSize: 32, opacity: 0.5 }}>🔒</Text>
+												<Text
+													style={{
+														fontSize: 32,
+														opacity: 0.5,
+													}}
+												>
+													🔒
+												</Text>
 												<MutedText className="text-xs text-center">
 													{b.name}
 												</MutedText>
