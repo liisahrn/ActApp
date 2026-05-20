@@ -8,7 +8,7 @@ type Props = TouchableOpacityProps & {
 export function PillButton({ label, outlined, className = '', style, ...props }: Props) {
   return (
     <TouchableOpacity
-      className={`rounded-full px-[14px] py-[6px] ${outlined ? 'bg-surface border border-primary' : 'bg-primary'} ${className}`}
+      className={`rounded-full px-[14] py-[6] ${outlined ? 'bg-surface border border-primary' : 'bg-primary'} ${className}`}
       style={style}
       activeOpacity={0.85}
       {...props}

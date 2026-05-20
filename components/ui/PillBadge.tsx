@@ -7,11 +7,11 @@ type Props = ViewProps & {
 export function PillBadge({ label, className = '', style, ...props }: Props) {
   return (
     <View
-      className={`bg-accent rounded-full px-[10px] py-1 self-start ${className}`}
+      className={`bg-accent rounded-full px-[10] py-1 self-start ${className}`}
       style={style}
       {...props}
     >
-      <Text className="text-xs font-heading text-white tracking-[1.5px]">
+      <Text className="text-xs font-heading text-white tracking-[1.5]">
         {label}
       </Text>
     </View>

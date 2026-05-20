@@ -62,14 +62,14 @@ function MissionModal({ mission, onClose, onPledge, onLog, onClaim }: {
         >
           <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ gap: 16, paddingBottom: 8 }}>
             <View className="flex-row items-start justify-between">
-              <View className="flex-row gap-[10px] flex-1">
+              <View className="flex-row gap-[10] flex-1">
                 <Text style={{ fontSize: 44, opacity: mission.pledged ? 0.4 + 0.6 * pct : 0.3 }}>
                   {mission.badge_emoji}
                 </Text>
                 <View style={{ gap: 5, flex: 1 }}>
-                  <View className="flex-row gap-[6px] flex-wrap">
+                  <View className="flex-row gap-[6] flex-wrap">
                     <View
-                      className="rounded-full px-2 py-[3px] border"
+                      className="rounded-full px-2 py-[3] border"
                       style={{
                         backgroundColor: mission.mission_type === 'monthly' ? Colors.accent + '22' : Colors.primary + '22',
                         borderColor: mission.mission_type === 'monthly' ? Colors.accent : Colors.primary,
@@ -82,7 +82,7 @@ function MissionModal({ mission, onClose, onPledge, onLog, onClaim }: {
                         {mission.mission_type.toUpperCase()}
                       </Text>
                     </View>
-                    <View className="rounded-full px-2 py-[3px] border" style={{ borderColor: diffColor }}>
+                    <View className="rounded-full px-2 py-[3] border" style={{ borderColor: diffColor }}>
                       <Text style={{ fontSize: 9, fontFamily: Fonts.heading, letterSpacing: 0.5, color: diffColor }}>
                         {mission.difficulty.toUpperCase()}
                       </Text>
@@ -99,13 +99,13 @@ function MissionModal({ mission, onClose, onPledge, onLog, onClaim }: {
             <Text className="font-heading text-white text-2xl" style={{ lineHeight: 30 }}>{mission.title}</Text>
 
             <View
-              className="rounded-lg p-4 border-l-[3px]"
+              className="rounded-lg p-4 border-l-[3]"
               style={{
                 backgroundColor: mission.completed ? Colors.primaryLight : Colors.surface,
                 borderLeftColor: mission.completed ? Colors.primary : Colors.border,
               }}
             >
-              <Text className="font-body text-muted text-xs mb-[6px]">
+              <Text className="font-body text-muted text-xs mb-[6]">
                 {mission.completed ? 'COMPLETED ✅' : 'YOUR PLEDGE'}
               </Text>
               <Text className="font-body text-white text-md" style={{ lineHeight: 22 }}>
@@ -127,7 +127,7 @@ function MissionModal({ mission, onClose, onPledge, onLog, onClaim }: {
 
             <Text className="font-body text-secondary text-md" style={{ lineHeight: 23 }}>{mission.description}</Text>
 
-            <View className="flex-row items-center gap-3 bg-surface rounded-md p-[14px]">
+            <View className="flex-row items-center gap-3 bg-surface rounded-md p-[14]">
               <Text style={{ fontSize: 22 }}>{CATEGORY_EMOJI[mission.category] ?? '🌍'}</Text>
               <View className="flex-1">
                 <Text className="font-body text-muted text-xs">ESTIMATED IMPACT</Text>
@@ -156,7 +156,7 @@ function MissionModal({ mission, onClose, onPledge, onLog, onClaim }: {
               </TouchableOpacity>
             )}
             {mission.claimed && (
-              <View className="bg-primary-light rounded-md p-[14px] items-center border border-primary">
+              <View className="bg-primary-light rounded-md p-[14] items-center border border-primary">
                 <Text className="font-heading text-primary text-md">✅ Reward Claimed!</Text>
               </View>
             )}
@@ -217,7 +217,7 @@ function MissionTile({ mission, onPress }: { mission: Mission; onPress: () => vo
         </View>
       )}
 
-      <View className="self-start rounded-full px-[7px] py-[2px] border" style={{ borderColor: diffColor, marginTop: 8 }}>
+      <View className="self-start rounded-full px-[7] py-[2] border" style={{ borderColor: diffColor, marginTop: 8 }}>
         <Text style={{ fontSize: 9, fontFamily: Fonts.heading, letterSpacing: 0.3, color: diffColor }}>
           {mission.difficulty}
         </Text>

@@ -67,12 +67,12 @@ export default function ProfileScreen() {
         <View className="items-center gap-2 px-7" style={{ paddingTop: 70, paddingBottom: 28 }}>
           <Text style={{ fontSize: 72, marginBottom: 4 }}>{profile?.avatar_url ?? '🌱'}</Text>
           <Heading className="text-2xl">@{profile?.username}</Heading>
-          <View className="bg-primary-light rounded-full px-[14px] py-1">
+          <View className="bg-primary-light rounded-full px-[14] py-1">
             <Text style={{ fontSize: 13, fontFamily: Fonts.heading, color: Colors.primary }}>
               Rank: {levelName} · Lv.{level}
             </Text>
           </View>
-          <View className="w-full gap-[6px] mt-2">
+          <View className="w-full gap-[6] mt-2">
             <View className="w-full overflow-hidden" style={{ height: 10, backgroundColor: Colors.surface, borderRadius: Radius.full }}>
               <View style={{ height: '100%', width: `${progress * 100}%`, backgroundColor: Colors.primary, borderRadius: Radius.full }} />
             </View>
@@ -85,35 +85,35 @@ export default function ProfileScreen() {
             <Card key={s.label} className="flex-1 p-3 items-center gap-1">
               <Text style={{ fontSize: 20 }}>{s.emoji}</Text>
               <Heading className="text-lg">{s.value}</Heading>
-              <MutedText className="text-[10px] text-center">{s.label}</MutedText>
+              <MutedText className="text-[10] text-center">{s.label}</MutedText>
             </Card>
           ))}
         </View>
 
-        <View className="p-5 gap-[14px]">
+        <View className="p-5 gap-[14]">
           <SectionTitle>Badges {earnedBadges.length > 0 ? `(${earnedBadges.length})` : ''}</SectionTitle>
           {badges.length === 0 ? (
             <EmptyState emoji="🎖️" title="" hint="Complete missions to earn badges!" className="pt-8" />
           ) : (
             <>
-              <View className="flex-row flex-wrap gap-[10px]">
+              <View className="flex-row flex-wrap gap-[10]">
                 {earnedBadges.map((b) => (
                   <Card key={b.id} className="p-3 items-center gap-1" style={{ width: '30%' }}>
                     <Text style={{ fontSize: 32 }}>{b.image_url ?? '🎖️'}</Text>
                     <Heading className="text-xs text-center">{b.name}</Heading>
-                    <MutedText className="text-[10px] text-center" style={{ lineHeight: 14 }}>{b.description}</MutedText>
+                    <MutedText className="text-[10] text-center" style={{ lineHeight: 14 }}>{b.description}</MutedText>
                   </Card>
                 ))}
               </View>
               {lockedBadges.length > 0 && (
                 <>
                   <MutedText className="text-sm mt-1">Locked</MutedText>
-                  <View className="flex-row flex-wrap gap-[10px]">
+                  <View className="flex-row flex-wrap gap-[10]">
                     {lockedBadges.map((b) => (
                       <Card key={b.id} className="p-3 items-center gap-1 opacity-45" style={{ width: '30%' }}>
                         <Text style={{ fontSize: 32, opacity: 0.5 }}>🔒</Text>
                         <MutedText className="text-xs text-center">{b.name}</MutedText>
-                        <MutedText className="text-[10px] text-center" style={{ lineHeight: 14 }}>{b.description}</MutedText>
+                        <MutedText className="text-[10] text-center" style={{ lineHeight: 14 }}>{b.description}</MutedText>
                       </Card>
                     ))}
                   </View>
@@ -124,7 +124,7 @@ export default function ProfileScreen() {
         </View>
 
         <TouchableOpacity
-          className="mx-5 mt-2 p-[14px] rounded-lg border items-center"
+          className="mx-5 mt-2 p-[14] rounded-lg border items-center"
           style={{ borderWidth: 1.5, borderColor: Colors.error }}
           onPress={handleSignOut}
         >

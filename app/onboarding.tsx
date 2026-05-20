@@ -49,7 +49,7 @@ export default function OnboardingScreen() {
           <Text className="text-secondary text-md">Choose your avatar and pick a username</Text>
         </View>
 
-        <View className="flex-row flex-wrap gap-[10px] justify-center">
+        <View className="flex-row flex-wrap gap-[10] justify-center">
           {AVATARS.map((emoji) => (
             <TouchableOpacity
               key={emoji}
@@ -75,7 +75,7 @@ export default function OnboardingScreen() {
           >
             <Text className="text-secondary text-lg" style={{ marginRight: 4 }}>@</Text>
             <AppTextInput
-              className="flex-1 py-[14px] bg-transparent border-0"
+              className="flex-1 py-[14] bg-transparent border-0"
               value={username}
               onChangeText={setUsername}
               placeholder="your_username"

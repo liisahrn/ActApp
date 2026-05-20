@@ -31,11 +31,11 @@ export default function VerifyScreen() {
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
     >
       <View className="flex-1 justify-center gap-6 px-7">
-        <TouchableOpacity className="absolute top-[60px] left-7" onPress={() => router.back()}>
+        <TouchableOpacity className="absolute top-[60] left-7" onPress={() => router.back()}>
           <Text className="text-primary text-md" style={{ fontWeight: '600' }}>← Back</Text>
         </TouchableOpacity>
 
-        <View className="items-center gap-[10px]">
+        <View className="items-center gap-[10]">
           <Text style={{ fontSize: 56, marginBottom: 4 }}>📧</Text>
           <Text className="text-white text-3xl text-center" style={{ fontWeight: '800' }}>Check your email</Text>
           <Text className="text-secondary text-md text-center" style={{ lineHeight: 22 }}>
@@ -45,7 +45,7 @@ export default function VerifyScreen() {
         </View>
 
         <TouchableOpacity activeOpacity={0.9} onPress={() => inputRef.current?.focus()}>
-          <View className="flex-row justify-center gap-[10px]">
+          <View className="flex-row justify-center gap-[10]">
             {[0, 1, 2, 3, 4, 5].map((i) => (
               <View
                 key={i}

@@ -5,7 +5,7 @@ import { Colors, Fonts } from '@/constants/theme'
 
 function TabIcon({ emoji, label, focused }: { emoji: string; label: string; focused: boolean }) {
   return (
-    <View className="items-center gap-[3px] w-[72px]">
+    <View className="items-center gap-[3] w-[72]">
       <Text style={{ fontSize: 24, opacity: focused ? 1 : 0.38 }}>{emoji}</Text>
       <Text
         style={{

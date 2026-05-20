@@ -45,16 +45,16 @@ export default function AuthScreen() {
         </View>
 
         <View
-          className="rounded-[28px] border border-border gap-5 p-6"
+          className="rounded-[28] border border-border gap-5 p-6"
           style={[{ backgroundColor: Colors.surfaceDark }, Shadow.md]}
         >
-          <Text className="font-heading text-white text-2xl tracking-[1px]">
+          <Text className="font-heading text-white text-2xl tracking-[1]">
             {isSignUp ? 'Create account' : 'Welcome back'}
           </Text>
 
           <View style={{ gap: 14 }}>
             <View style={{ gap: 6 }}>
-              <Text className="font-body text-secondary text-sm tracking-[0.5px]">Email</Text>
+              <Text className="font-body text-secondary text-sm tracking-[0.5]">Email</Text>
               <AppTextInput
                 value={email}
                 onChangeText={setEmail}
@@ -67,7 +67,7 @@ export default function AuthScreen() {
               />
             </View>
             <View style={{ gap: 6 }}>
-              <Text className="font-body text-secondary text-sm tracking-[0.5px]">Password</Text>
+              <Text className="font-body text-secondary text-sm tracking-[0.5]">Password</Text>
               <AppTextInput
                 value={password}
                 onChangeText={setPassword}
@@ -82,7 +82,7 @@ export default function AuthScreen() {
             onPress={handleAuth}
             disabled={loading}
             label={loading ? 'Loading…' : isSignUp ? 'Create account →' : 'Sign in →'}
-            className="tracking-[1px]"
+            className="tracking-[1]"
           />
 
           <TouchableOpacity onPress={() => setIsSignUp(!isSignUp)} className="items-center">

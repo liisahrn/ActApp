@@ -84,7 +84,7 @@ export default function ImpactBankScreen() {
         </View>
 
         <View
-          className="mx-5 items-center gap-[6px] border rounded-xl p-7"
+          className="mx-5 items-center gap-[6] border rounded-xl p-7"
           style={[{ backgroundColor: Colors.surfaceDark, borderColor: Colors.primary + '40' }, Shadow.md]}
         >
           <MutedText className="text-sm">TOTAL CO₂ SAVED</MutedText>
@@ -99,7 +99,7 @@ export default function ImpactBankScreen() {
             <SectionTitle>That's the same as…</SectionTitle>
             <View className="flex-row flex-wrap gap-2">
               {equivalents.map((eq, i) => (
-                <View key={i} className="border border-border rounded-lg p-[14px] items-center gap-1" style={{ width: '47.5%', backgroundColor: Colors.surfaceDark }}>
+                <View key={i} className="border border-border rounded-lg p-[14] items-center gap-1" style={{ width: '47.5%', backgroundColor: Colors.surfaceDark }}>
                   <Text style={{ fontSize: 26 }}>{eq.emoji}</Text>
                   <Text style={{ fontSize: 20, fontFamily: Fonts.heading, color: Colors.text }}>{eq.value.toLocaleString()}</Text>
                   <Text style={{ fontSize: 10, fontFamily: Fonts.body, color: Colors.textMuted, textAlign: 'center', lineHeight: 14 }}>{eq.label}</Text>
@@ -112,7 +112,7 @@ export default function ImpactBankScreen() {
         {weeks.length > 0 && (
           <View style={{ paddingHorizontal: 20, paddingTop: 24, gap: 12 }}>
             <SectionTitle>Week by week</SectionTitle>
-            <View className="flex-row items-end gap-[6px]" style={{ height: 120 }}>
+            <View className="flex-row items-end gap-[6]" style={{ height: 120 }}>
               {weeks.map((w, i) => (
                 <View key={i} className="flex-1 items-center gap-1 justify-end" style={{ height: '100%' }}>
                   <Text style={{ fontSize: 8, fontFamily: Fonts.heading, color: Colors.textMuted }}>{w.co2 > 0 ? `${w.co2}` : ''}</Text>
@@ -123,7 +123,7 @@ export default function ImpactBankScreen() {
                 </View>
               ))}
             </View>
-            <MutedText className="text-[10px] text-right mt-1">kg CO₂ per week</MutedText>
+            <MutedText className="text-[10] text-right mt-1">kg CO₂ per week</MutedText>
           </View>
         )}
 

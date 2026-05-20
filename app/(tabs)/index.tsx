@@ -75,7 +75,7 @@ export default function TodayScreen() {
             <AppLogo size="sm" />
             <View style={{ alignItems: 'flex-end', gap: 4 }}>
               <View
-                className="rounded-full px-3 py-[5px] border"
+                className="rounded-full px-3 py-[5] border"
                 style={{ backgroundColor: `${Colors.xpGold}20`, borderColor: `${Colors.xpGold}40` }}
               >
                 <Text style={{ fontSize: 13, fontFamily: Fonts.heading, color: Colors.xpGold }}>
@@ -83,7 +83,7 @@ export default function TodayScreen() {
                 </Text>
               </View>
               <View
-                className="rounded-full px-3 py-[5px] border"
+                className="rounded-full px-3 py-[5] border"
                 style={{ backgroundColor: Colors.kindGemLight, borderColor: `${Colors.kindGem}40` }}
               >
                 <Text style={{ fontSize: 13, fontFamily: Fonts.heading, color: Colors.kindGem }}>
@@ -99,7 +99,7 @@ export default function TodayScreen() {
 
           <View className="flex-row items-center gap-3">
             <View
-              className="flex-row items-center gap-[6px] rounded-full px-[14px] py-2"
+              className="flex-row items-center gap-[6] rounded-full px-[14] py-2"
               style={{ backgroundColor: `${Colors.streakOrange}28` }}
             >
               <Text style={{ fontSize: 18 }}>🔥</Text>

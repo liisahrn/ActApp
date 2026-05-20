@@ -64,12 +64,12 @@ export default function FriendsScreen() {
     const medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : `${index + 1}`
     const isFollowing = following.has(item.id)
     return (
-      <Card row className={`gap-3 p-[14px] ${isMe ? 'border-primary border-[1.5px]' : ''}`}>
+      <Card row className={`gap-3 p-[14] ${isMe ? 'border-primary border-[1.5]' : ''}`}>
         <Text style={{ fontFamily: Fonts.heading, color: Colors.textSecondary, fontSize: 17, width: 32, textAlign: 'center' }}>{medal}</Text>
         <Text style={{ fontSize: 26 }}>{item.avatar_url}</Text>
         <View className="flex-1">
           <Heading className="text-md">{item.username}{isMe ? ' · you' : ''}</Heading>
-          <MutedText className="text-xs mt-[2px]">Lv.{item.level} · 🔥{item.current_streak}{item.country ? ` · ${item.country}` : ''}</MutedText>
+          <MutedText className="text-xs mt-[2]">Lv.{item.level} · 🔥{item.current_streak}{item.country ? ` · ${item.country}` : ''}</MutedText>
         </View>
         <View className="items-end gap-1">
           <Text style={{ fontFamily: Fonts.heading, fontSize: 13, color: Colors.xpGold }}>⭐ {item.xp}</Text>
@@ -92,7 +92,7 @@ export default function FriendsScreen() {
           {(['friends', 'global'] as Tab[]).map((tab) => (
             <TouchableOpacity
               key={tab}
-              className="flex-1 py-[10px] rounded-md items-center border"
+              className="flex-1 py-[10] rounded-md items-center border"
               style={{
                 backgroundColor: activeTab === tab ? Colors.primary : Colors.surface,
                 borderColor: activeTab === tab ? Colors.primary : Colors.border,
@@ -125,7 +125,7 @@ export default function FriendsScreen() {
       {searchResults.length > 0 && (
         <Card className="mx-5 mb-2">
           {searchResults.map((item) => (
-            <View key={item.id} className="flex-row items-center gap-[10px] p-3 border-b border-border-light">
+            <View key={item.id} className="flex-row items-center gap-[10] p-3 border-b border-border-light">
               <Text style={{ fontSize: 24 }}>{item.avatar_url}</Text>
               <View className="flex-1">
                 <Heading className="text-md">{item.username}</Heading>
