@@ -13,11 +13,11 @@ export default function AppLogo({ size = 'md', showTagline = false }: Props) {
 	const rowWidth = globeSize * 3 - overlap * 2
 
 	return (
-		<View className="items-center gap-[14px]">
+		<View className="items-center gap-[14]">
 			{/* Globe trio + ACTAPP overlay */}
 			<View
 				style={{ width: rowWidth, height: globeSize }}
-				className="relative items-center justify-center"
+				className="items-center justify-center"
 			>
 				{/* Three overlapping globes */}
 				<View className="flex-row items-center absolute">
@@ -62,8 +62,8 @@ export default function AppLogo({ size = 'md', showTagline = false }: Props) {
 
 			{/* Mission tagline pill */}
 			{showTagline && (
-				<View className="bg-accent rounded-full px-[18px] py-2">
-					<Text className="font-body text-white text-xs tracking-[1.5px]">
+				<View className="bg-accent rounded-full px-[18] py-2">
+					<Text className="font-body text-white text-xs" style={{ letterSpacing: 1.5 }}>
 						ONE MISSION. EVERYONE. EVERY DAY.
 					</Text>
 				</View>
