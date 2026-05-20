@@ -60,9 +60,15 @@ export default function SwipeToComplete({
 		outputRange: [1, 0],
 		extrapolate: "clamp",
 	});
-	const fillWidth = translateX.interpolate({
+	const fillScale = translateX.interpolate({
 		inputRange: [0, MAX_SLIDE],
-		outputRange: [THUMB_SIZE + 4, TRACK_WIDTH],
+		outputRange: [(THUMB_SIZE + 4) / TRACK_WIDTH, 1],
+		extrapolate: "clamp",
+	});
+	// scaleX anchors to center, so we shift left to keep the fill left-anchored
+	const fillTranslateX = translateX.interpolate({
+		inputRange: [0, MAX_SLIDE],
+		outputRange: [-MAX_SLIDE / 2, 0],
 		extrapolate: "clamp",
 	});
 
@@ -105,10 +111,11 @@ export default function SwipeToComplete({
 					left: 0,
 					top: 0,
 					bottom: 0,
-					width: fillWidth,
+					width: TRACK_WIDTH,
 					backgroundColor: thumbColor,
 					borderRadius: Radius.full,
 					opacity: 0.2,
+					transform: [{ translateX: fillTranslateX }, { scaleX: fillScale }],
 				}}
 			/>
 			<Animated.Text

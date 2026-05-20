@@ -67,20 +67,22 @@ export default function ImpactBankScreen() {
 
 	const fetchImpact = async (userId: string) => {
 		setLoading(true);
-		const { data: completionRows } = await supabase
+		const { data: completionRows, error: completionsError } = await supabase
 			.from("completions")
-			.select("action_id, created_at")
+			.select("action_id, completed_at")
 			.eq("user_id", userId)
-			.order("created_at", { ascending: false });
+			.order("completed_at", { ascending: false });
+		if (completionsError) { console.error("fetchImpact completions:", completionsError.message); setLoading(false); return; }
 		if (!completionRows?.length) {
 			setLoading(false);
 			return;
 		}
 		const actionIds = [...new Set(completionRows.map((c) => c.action_id))];
-		const { data: actionRows } = await supabase
+		const { data: actionRows, error: actionsError } = await supabase
 			.from("actions")
 			.select("id, co2_equivalent, category, action_type")
 			.in("id", actionIds);
+		if (actionsError) { console.error("fetchImpact actions:", actionsError.message); setLoading(false); return; }
 		const actionMap: Record<
 			string,
 			{ co2_equivalent: number; category: string; action_type: string }
@@ -103,7 +105,7 @@ export default function ImpactBankScreen() {
 		setTotalCO2(Math.round(co2 * 10) / 10);
 		const weekMap: Record<string, WeekRow> = {};
 		carbon.forEach((c) => {
-			const d = new Date(c.created_at);
+			const d = new Date(c.completed_at);
 			const mon = new Date(d);
 			mon.setDate(d.getDate() - ((d.getDay() + 6) % 7));
 			const key = mon.toISOString().split("T")[0];
