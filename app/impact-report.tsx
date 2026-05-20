@@ -80,7 +80,7 @@ export default function ImpactReportScreen() {
         <Animated.View style={{ opacity: fadeAnim, transform: [{ translateY: slideAnim }], gap: 16 }}>
           {/* Header card */}
           <View
-            className="rounded-xl p-[22px] gap-[10px] items-center border border-border"
+            className="rounded-xl p-[22] gap-[10] items-center border border-border"
             style={[{ backgroundColor: Colors.surfaceDark }, Shadow.md]}
           >
             <PillBadge label="MISSION COMPLETE" className="self-center" />
@@ -99,7 +99,7 @@ export default function ImpactReportScreen() {
               <Image source={{ uri: imageUrl }} style={{ width: '100%', height: '100%' }} contentFit="cover" transition={400} />
             </View>
           ) : (
-            <View className="items-center justify-center gap-2 border border-border" style={{ height: 140, backgroundColor: Colors.surface, borderRadius: Radius.xl }}>
+            <View className="items-center justify-center gap-2 border border-border bg-surface" style={{ height: 140, borderRadius: Radius.xl }}>
               <Text style={{ fontSize: 48 }}>🌍</Text>
               <MutedText className="text-sm">Impact image generating…</MutedText>
             </View>
@@ -107,7 +107,7 @@ export default function ImpactReportScreen() {
 
           {/* Big number */}
           <View
-            className="rounded-xl p-7 items-center gap-[6px] border"
+            className="rounded-xl p-7 items-center gap-[6] border"
             style={[{ backgroundColor: Colors.surfaceDark, borderColor: Colors.primary + '40' }, Shadow.md]}
           >
             <Text style={{ fontSize: 72, fontFamily: Fonts.heading, color: Colors.primary, letterSpacing: -2 }}>
@@ -124,12 +124,12 @@ export default function ImpactReportScreen() {
           {/* CO₂ equivalents */}
           {co2 > 0 && (
             <View>
-              <SectionTitle className="mb-[10px]">That's the same as…</SectionTitle>
+              <SectionTitle className="mb-[10]">That's the same as…</SectionTitle>
               <View className="flex-row flex-wrap gap-2">
                 {equivalents.map((eq, i) => (
                   <Animated.View
                     key={i}
-                    className="border border-border rounded-lg p-[14px] items-center gap-1"
+                    className="border border-border rounded-lg p-[14] items-center gap-1"
                     style={{
                       width: '47.5%', backgroundColor: Colors.surfaceDark,
                       opacity: showEquiv ? equivAnims[i] : 0,
@@ -148,8 +148,8 @@ export default function ImpactReportScreen() {
 
           {/* Country breakdown */}
           {countries.length > 0 && (
-            <View className="rounded-xl p-[18px] border border-border" style={{ backgroundColor: Colors.surfaceDark }}>
-              <SectionTitle className="mb-[14px]">🌐 By country</SectionTitle>
+            <View className="rounded-xl p-[18] border border-border" style={{ backgroundColor: Colors.surfaceDark }}>
+              <SectionTitle className="mb-[14]">🌐 By country</SectionTitle>
               {countries.map((row, i) => (
                 <View key={row.country} className="flex-row items-center gap-2" style={{ marginBottom: 10 }}>
                   <Text style={{ width: 20, fontSize: 11, fontFamily: Fonts.heading, color: Colors.textMuted, textAlign: 'center' }}>{i + 1}</Text>
@@ -166,7 +166,7 @@ export default function ImpactReportScreen() {
 
           {/* XP banner */}
           <View
-            className="rounded-md p-[14px] items-center border"
+            className="rounded-md p-[14] items-center border"
             style={{ backgroundColor: Colors.xpGold + '20', borderColor: Colors.xpGold + '40' }}
           >
             <Text style={{ fontSize: 13, fontFamily: Fonts.heading, color: Colors.xpGold, textAlign: 'center', lineHeight: 20 }}>
