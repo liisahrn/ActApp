@@ -9,7 +9,7 @@ import {
 	TouchableOpacity,
 	View,
 } from "react-native";
-import { PrimaryButton } from "@/components/ui";
+import { PrimaryButton } from "@/components/ui/PrimaryButton";
 import { Colors, Radius, Shadow } from "@/constants/theme";
 import { supabase } from "@/lib/supabase";
 

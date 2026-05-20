@@ -5,14 +5,12 @@ import { Animated, ScrollView, Text, View } from "react-native";
 import AppLogo from "@/components/AppLogo";
 import Background from "@/components/Background";
 import SwipeToComplete from "@/components/SwipeToComplete";
-import {
-	BodyText,
-	EmptyState,
-	Heading,
-	MutedText,
-	PillBadge,
-	SectionTitle,
-} from "@/components/ui";
+import { BodyText } from "@/components/ui/BodyText";
+import { EmptyState } from "@/components/ui/EmptyState";
+import { Heading } from "@/components/ui/Heading";
+import { MutedText } from "@/components/ui/MutedText";
+import { PillBadge } from "@/components/ui/PillBadge";
+import { SectionTitle } from "@/components/ui/SectionTitle";
 import { Colors, Fonts, LEVEL_NAMES, Radius, Shadow } from "@/constants/theme";
 import { useActionStore } from "@/store/actionStore";
 import { useAuthStore } from "@/store/authStore";

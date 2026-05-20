@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 import { Alert, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import Background from "@/components/Background";
-import {
-	Card,
-	EmptyState,
-	Heading,
-	MutedText,
-	SectionTitle,
-} from "@/components/ui";
+import { Card } from "@/components/ui/Card";
+import { EmptyState } from "@/components/ui/EmptyState";
+import { Heading } from "@/components/ui/Heading";
+import { MutedText } from "@/components/ui/MutedText";
+import { SectionTitle } from "@/components/ui/SectionTitle";
 import {
 	Colors,
 	Fonts,

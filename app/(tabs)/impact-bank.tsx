@@ -2,13 +2,11 @@ import { useEffect, useState } from "react";
 import { ScrollView, Text, View } from "react-native";
 import Background from "@/components/Background";
 import MissionsCard from "@/components/MissionsCard";
-import {
-	EmptyState,
-	Heading,
-	MutedText,
-	PillBadge,
-	SectionTitle,
-} from "@/components/ui";
+import { EmptyState } from "@/components/ui/EmptyState";
+import { Heading } from "@/components/ui/Heading";
+import { MutedText } from "@/components/ui/MutedText";
+import { PillBadge } from "@/components/ui/PillBadge";
+import { SectionTitle } from "@/components/ui/SectionTitle";
 import { Colors, Fonts, Shadow } from "@/constants/theme";
 import { supabase } from "@/lib/supabase";
 import { useActionStore } from "@/store/actionStore";

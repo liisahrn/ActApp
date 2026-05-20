@@ -11,14 +11,12 @@ import {
 	View,
 } from "react-native";
 import Background from "@/components/Background";
-import {
-	BodyText,
-	Heading,
-	MutedText,
-	PillBadge,
-	PrimaryButton,
-	SectionTitle,
-} from "@/components/ui";
+import { BodyText } from "@/components/ui/BodyText";
+import { Heading } from "@/components/ui/Heading";
+import { MutedText } from "@/components/ui/MutedText";
+import { PillBadge } from "@/components/ui/PillBadge";
+import { PrimaryButton } from "@/components/ui/PrimaryButton";
+import { SectionTitle } from "@/components/ui/SectionTitle";
 import { Colors, Fonts, Radius, Shadow } from "@/constants/theme";
 import { supabase } from "@/lib/supabase";
 import { useActionStore } from "@/store/actionStore";

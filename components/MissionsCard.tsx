@@ -8,10 +8,11 @@ import {
 	TouchableOpacity,
 	View,
 } from "react-native";
-import { PrimaryButton, SectionTitle } from "@/components/ui";
 import { Colors, Fonts, Radius, Shadow } from "@/constants/theme";
 import { type Mission, useActionStore } from "@/store/actionStore";
 import { useAuthStore } from "@/store/authStore";
+import { PrimaryButton } from "./ui/PrimaryButton";
+import { SectionTitle } from "./ui/SectionTitle";
 
 const DIFFICULTY_COLOR = {
 	easy: Colors.primary,
