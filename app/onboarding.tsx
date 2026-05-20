@@ -75,7 +75,6 @@ export default function OnboardingScreen() {
 				id: user.id,
 				username: trimmed,
 				avatar_url: selectedAvatar,
-				avatar_emoji: selectedAvatar,
 				xp: 0,
 				level: 1,
 				timezone,

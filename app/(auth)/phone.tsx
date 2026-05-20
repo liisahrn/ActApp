@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import AppLogo from "@/components/AppLogo";
 import Background from "@/components/Background";
+import { AppTextInput } from "@/components/ui/AppTextInput";
 import { PrimaryButton } from "@/components/ui/PrimaryButton";
 import { Colors, Shadow } from "@/constants/theme";
 import { supabase } from "@/lib/supabase";
