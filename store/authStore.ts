@@ -1,3 +1,4 @@
+import type { Session } from "@supabase/supabase-js";
 import { create } from "zustand";
 import { supabase } from "@/lib/supabase";
 
@@ -13,10 +14,10 @@ type Profile = {
 };
 
 type AuthState = {
-	session: any | null;
+	session: Session | null;
 	profile: Profile | null;
 	loading: boolean;
-	setSession: (session: any | null) => void;
+	setSession: (session: Session | null) => void;
 	setProfile: (profile: Profile | null) => void;
 	fetchProfile: (userId: string) => Promise<void>;
 	signOut: () => Promise<void>;

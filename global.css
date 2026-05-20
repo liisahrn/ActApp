@@ -1,3 +1,6 @@
+/* biome-ignore lint/suspicious/noUnknownAtRules: NativeWind/Tailwind directive */
 @tailwind base;
+/* biome-ignore lint/suspicious/noUnknownAtRules: NativeWind/Tailwind directive */
 @tailwind components;
+/* biome-ignore lint/suspicious/noUnknownAtRules: NativeWind/Tailwind directive */
 @tailwind utilities;

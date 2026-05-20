@@ -223,7 +223,7 @@ export const useActionStore = create<ActionState>((set, get) => ({
 	logMissionDay: async (userId: string, missionId: string) => {
 		const t = today();
 		const mission = get().missions.find((m) => m.id === missionId);
-		if (!mission || !mission.pledged || mission.completed) return;
+		if (!mission?.pledged || mission.completed) return;
 		if (mission.last_logged_date === t) return; // already logged today
 
 		const newCount = mission.count + 1;
@@ -256,7 +256,7 @@ export const useActionStore = create<ActionState>((set, get) => ({
 
 	claimMissionReward: async (userId: string, missionId: string) => {
 		const mission = get().missions.find((m) => m.id === missionId);
-		if (!mission || !mission.completed || mission.claimed)
+		if (!mission?.completed || mission.claimed)
 			return { xpEarned: 0, gemsEarned: 0 };
 
 		await supabase

@@ -2,7 +2,9 @@ import { createClient } from "@supabase/supabase-js";
 import * as SecureStore from "expo-secure-store";
 import "react-native-url-polyfill/auto";
 
+// biome-ignore lint/style/noNonNullAssertion: env vars are required and set at build time
 const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL!;
+// biome-ignore lint/style/noNonNullAssertion: env vars are required and set at build time
 const supabaseAnonKey = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY!;
 
 const ExpoSecureStoreAdapter = {
