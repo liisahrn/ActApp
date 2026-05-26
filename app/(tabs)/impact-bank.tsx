@@ -147,7 +147,7 @@ export default function ImpactBankScreen() {
 		<View className="flex-1">
 			<Background />
 			<ScrollView
-				contentContainerStyle={{ paddingBottom: 40 }}
+				contentContainerStyle={{ paddingBottom: 110 }}
 				showsVerticalScrollIndicator={false}
 			>
 				<View

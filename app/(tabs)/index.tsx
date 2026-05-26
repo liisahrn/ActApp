@@ -128,7 +128,7 @@ export default function TodayScreen() {
 		<View className="flex-1">
 			<Background />
 			<ScrollView
-				contentContainerStyle={{ paddingBottom: 40 }}
+				contentContainerStyle={{ paddingBottom: 110 }}
 				showsVerticalScrollIndicator={false}
 			>
 				{/* Header */}

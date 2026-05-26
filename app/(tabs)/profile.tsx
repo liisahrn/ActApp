@@ -129,7 +129,7 @@ export default function ProfileScreen() {
 			<ScrollView showsVerticalScrollIndicator={false}>
 				<View
 					className="items-center gap-2 px-7"
-					style={{ paddingTop: 70, paddingBottom: 28 }}
+					style={{ paddingTop: 60, paddingBottom: 110 }}
 				>
 					<Text style={{ fontSize: 72, marginBottom: 4 }}>
 						{profile?.avatar_url ?? "🌱"}
