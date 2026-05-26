@@ -348,7 +348,7 @@ export default function TodayScreen() {
 							<View
 								style={[
 									{
-										backgroundColor: "rgba(30,50,80,0.7)",
+										backgroundColor: Colors.surfaceDark,
 										borderRadius: Radius.xl,
 										padding: 22,
 										gap: 12,
