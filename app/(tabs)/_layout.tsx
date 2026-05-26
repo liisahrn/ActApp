@@ -13,7 +13,7 @@ function TabIcon({
 	focused: boolean;
 }) {
 	return (
-		<View style={{ alignItems: "center", gap: 3 }}>
+		<View style={{ alignItems: "center", gap: 3, width: 68 }}>
 			<View
 				style={{
 					paddingHorizontal: 14,
