@@ -3,7 +3,7 @@ import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { useFonts } from 'expo-font'
-import { SchoolBell_400Regular } from '@expo-google-fonts/schoolbell'
+import { Schoolbell_400Regular } from '@expo-google-fonts/schoolbell'
 import { ChakraPetch_700Bold } from '@expo-google-fonts/chakra-petch'
 import { supabase } from '@/lib/supabase'
 import { useAuthStore } from '@/store/authStore'
@@ -12,7 +12,7 @@ export default function RootLayout() {
   const { setSession, fetchProfile } = useAuthStore()
 
   const [fontsLoaded] = useFonts({
-    SchoolBell_400Regular,
+    Schoolbell_400Regular,
     ChakraPetch_700Bold,
   })
 

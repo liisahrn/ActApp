@@ -6,90 +6,170 @@ import {
 import { router } from 'expo-router'
 import { supabase } from '@/lib/supabase'
 import { Colors, Fonts, Radius, Shadow } from '@/constants/theme'
+import { S } from '@/constants/styles'
 import Background from '@/components/Background'
 import AppLogo from '@/components/AppLogo'
 
-export default function AuthScreen() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [isSignUp, setIsSignUp] = useState(true)
-  const [loading, setLoading] = useState(false)
+// Supabase requires an email — we construct a synthetic one the user never sees.
+const toEmail = (username: string) => `${username.toLowerCase()}@actapp.local`
 
-  const handleAuth = async () => {
-    const trimmedEmail = email.trim().toLowerCase()
-    if (!trimmedEmail.includes('@')) {
-      Alert.alert('Invalid email', 'Please enter a valid email address.')
-      return
+export default function AuthScreen() {
+  const [mode, setMode]         = useState<'signup' | 'login'>('signup')
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [loading, setLoading]   = useState(false)
+
+  const trimmed = username.trim().toLowerCase().replace(/[^a-z0-9_]/g, '')
+
+  const validate = () => {
+    if (trimmed.length < 3) {
+      Alert.alert('Too short', 'Agent name must be at least 3 characters.')
+      return false
+    }
+    if (!/^[a-z0-9_]+$/.test(trimmed)) {
+      Alert.alert('Invalid name', 'Only letters, numbers, and underscores.')
+      return false
     }
     if (password.length < 6) {
-      Alert.alert('Password too short', 'Password must be at least 6 characters.')
-      return
+      Alert.alert('Weak password', 'Password must be at least 6 characters.')
+      return false
     }
+    return true
+  }
+
+  const handleSignUp = async () => {
+    if (!validate()) return
     setLoading(true)
-    if (isSignUp) {
-      const { data, error } = await supabase.auth.signUp({ email: trimmedEmail, password })
+    try {
+      // Check username is available
+      const { data: existing } = await supabase
+        .from('profiles')
+        .select('id')
+        .eq('username', trimmed)
+        .maybeSingle()
+
+      if (existing) {
+        Alert.alert('Name taken', 'That agent name is already in use. Choose another.')
+        return
+      }
+
+      const { data, error } = await supabase.auth.signUp({
+        email: toEmail(trimmed),
+        password,
+      })
+
       if (error) {
-        if (error.message.includes('already registered')) {
-          Alert.alert('Already registered', 'You already have an account. Try signing in instead.')
-          setIsSignUp(false)
+        // Username already registered = account exists
+        if (error.message.toLowerCase().includes('already registered')) {
+          Alert.alert('Already registered', 'An agent with that name already exists. Try signing in.')
+          setMode('login')
         } else {
           Alert.alert('Sign up failed', error.message)
         }
-      } else if (data.session === null) {
-        Alert.alert('Check your email', 'Confirm your email then sign in.\n\nTip: disable "Enable email confirmations" in Supabase → Auth → Settings for dev.')
-      } else {
-        router.replace('/')
+        return
       }
-    } else {
-      const { error } = await supabase.auth.signInWithPassword({ email: trimmedEmail, password })
+
+      if (!data.session) {
+        // Email confirmation is on — tell them to disable it
+        Alert.alert(
+          'One more step',
+          'Disable "Enable email confirmations" in Supabase → Auth → Settings, then try again.'
+        )
+        return
+      }
+
+      // Create initial profile with username
+      const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+      await supabase.from('profiles').upsert({
+        id: data.user!.id,
+        username: trimmed,
+        xp: 0,
+        level: 1,
+        kind_gems: 0,
+        timezone,
+      })
+
+      router.replace('/onboarding')
+    } catch (e: any) {
+      Alert.alert('Error', e.message)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleLogin = async () => {
+    if (!validate()) return
+    setLoading(true)
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email: toEmail(trimmed),
+        password,
+      })
+
       if (error) {
-        if (error.message.includes('Email not confirmed')) {
-          Alert.alert('Email not confirmed', 'Disable "Enable email confirmations" in Supabase → Auth → Settings.')
+        if (error.message.toLowerCase().includes('invalid login')) {
+          Alert.alert('Wrong details', 'Agent name or password is incorrect.')
         } else {
           Alert.alert('Sign in failed', error.message)
         }
-      } else {
-        router.replace('/')
+        return
       }
+
+      router.replace('/')
+    } catch (e: any) {
+      Alert.alert('Error', e.message)
+    } finally {
+      setLoading(false)
     }
-    setLoading(false)
   }
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+    <KeyboardAvoidingView style={S.fill} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <Background />
       <ScrollView contentContainerStyle={styles.inner} keyboardShouldPersistTaps="handled">
+
         <View style={styles.logoArea}>
           <AppLogo size="lg" showTagline />
         </View>
 
         <View style={styles.card}>
+          <View style={[S.missionBadge, { alignSelf: 'center' }]}>
+            <Text style={S.missionBadgeText}>
+              {mode === 'signup' ? 'ENLIST AS AN AGENT' : 'AGENT LOGIN'}
+            </Text>
+          </View>
+
           <Text style={styles.cardTitle}>
-            {isSignUp ? 'Create account' : 'Welcome back'}
+            {mode === 'signup' ? 'Create your identity' : 'Welcome back, Agent'}
           </Text>
 
           <View style={styles.form}>
             <View style={styles.inputGroup}>
-              <Text style={styles.label}>Email</Text>
-              <TextInput
-                style={styles.input}
-                value={email}
-                onChangeText={setEmail}
-                placeholder="you@example.com"
-                placeholderTextColor={Colors.textMuted}
-                keyboardType="email-address"
-                autoCapitalize="none"
-                autoCorrect={false}
-                autoFocus
-              />
+              <Text style={styles.label}>Agent Name</Text>
+              <View style={styles.inputRow}>
+                <Text style={styles.at}>@</Text>
+                <TextInput
+                  style={styles.input}
+                  value={username}
+                  onChangeText={t => setUsername(t.replace(/[^a-zA-Z0-9_]/g, ''))}
+                  placeholder="your_agent_name"
+                  placeholderTextColor={Colors.textMuted}
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  autoFocus
+                  maxLength={20}
+                />
+              </View>
+              <Text style={styles.hint}>Letters, numbers, underscores only</Text>
             </View>
+
             <View style={styles.inputGroup}>
               <Text style={styles.label}>Password</Text>
               <TextInput
-                style={styles.input}
+                style={[styles.inputStandalone]}
                 value={password}
                 onChangeText={setPassword}
-                placeholder="At least 6 characters"
+                placeholder="Min. 6 characters"
                 placeholderTextColor={Colors.textMuted}
                 secureTextEntry
               />
@@ -97,71 +177,43 @@ export default function AuthScreen() {
           </View>
 
           <TouchableOpacity
-            style={[styles.button, loading && styles.buttonDisabled]}
-            onPress={handleAuth}
+            style={[S.primaryBtn, loading && { opacity: 0.6 }]}
+            onPress={mode === 'signup' ? handleSignUp : handleLogin}
             disabled={loading}
             activeOpacity={0.85}
           >
-            <Text style={styles.buttonText}>
-              {loading ? 'Loading…' : isSignUp ? 'Create account →' : 'Sign in →'}
+            <Text style={S.primaryBtnText}>
+              {loading ? 'Loading…' : mode === 'signup' ? 'Deploy as Agent →' : 'Sign in →'}
             </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => setIsSignUp(!isSignUp)} style={styles.toggle}>
+          <TouchableOpacity onPress={() => setMode(mode === 'signup' ? 'login' : 'signup')} style={styles.toggle}>
             <Text style={styles.toggleText}>
-              {isSignUp ? 'Already have an account? ' : "Don't have an account? "}
-              <Text style={styles.toggleLink}>{isSignUp ? 'Sign in' : 'Sign up'}</Text>
+              {mode === 'signup' ? 'Already an agent? ' : 'New recruit? '}
+              <Text style={styles.toggleLink}>{mode === 'signup' ? 'Sign in' : 'Sign up'}</Text>
             </Text>
           </TouchableOpacity>
         </View>
+
       </ScrollView>
     </KeyboardAvoidingView>
   )
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
-  inner: { flexGrow: 1, paddingHorizontal: 24, justifyContent: 'center', gap: 32, paddingVertical: 60 },
-  logoArea: { alignItems: 'center' },
-  card: {
-    backgroundColor: Colors.surfaceDark,
-    borderRadius: 28,
-    padding: 24,
-    gap: 20,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    ...Shadow.md,
-  },
-  cardTitle: {
-    fontFamily: Fonts.heading,
-    fontSize: Fonts.sizes.xxl,
-    color: Colors.text,
-    letterSpacing: 1,
-  },
-  form: { gap: 14 },
-  inputGroup: { gap: 6 },
-  label: { fontFamily: Fonts.body, fontSize: Fonts.sizes.sm, color: Colors.textSecondary, letterSpacing: 0.5 },
-  input: {
-    backgroundColor: Colors.surface,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: Radius.md,
-    paddingHorizontal: 16,
-    paddingVertical: 13,
-    fontSize: Fonts.sizes.md,
-    color: Colors.text,
-    fontFamily: Fonts.body,
-  },
-  button: {
-    backgroundColor: Colors.primary,
-    borderRadius: Radius.lg,
-    paddingVertical: 15,
-    alignItems: 'center',
-    ...Shadow.lg,
-  },
-  buttonDisabled: { opacity: 0.6 },
-  buttonText: { fontFamily: Fonts.heading, color: '#fff', fontSize: Fonts.sizes.lg, letterSpacing: 1 },
-  toggle: { alignItems: 'center' },
-  toggleText: { fontFamily: Fonts.body, fontSize: Fonts.sizes.sm, color: Colors.textMuted },
-  toggleLink: { color: Colors.primary, fontFamily: Fonts.heading },
+  inner:     { flexGrow: 1, paddingHorizontal: 24, justifyContent: 'center', gap: 32, paddingVertical: 60 },
+  logoArea:  { alignItems: 'center' },
+  card:      { backgroundColor: Colors.surfaceDark, borderRadius: 28, padding: 24, gap: 20, borderWidth: 1, borderColor: Colors.border, ...Shadow.md },
+  cardTitle: { fontFamily: Fonts.heading, fontSize: Fonts.sizes.xxl, color: Colors.text, letterSpacing: 1, textAlign: 'center' },
+  form:      { gap: 14 },
+  inputGroup:{ gap: 6 },
+  label:     { fontFamily: Fonts.body, fontSize: Fonts.sizes.sm, color: Colors.textSecondary, letterSpacing: 0.5 },
+  hint:      { fontFamily: Fonts.body, fontSize: Fonts.sizes.xs, color: Colors.textMuted },
+  inputRow:  { flexDirection: 'row', alignItems: 'center', backgroundColor: Colors.surface, borderWidth: 1.5, borderColor: Colors.border, borderRadius: Radius.md, paddingHorizontal: 14 },
+  at:        { fontSize: Fonts.sizes.lg, color: Colors.textMuted, marginRight: 4 },
+  input:     { flex: 1, paddingVertical: 13, fontSize: Fonts.sizes.md, color: Colors.text, fontFamily: Fonts.body },
+  inputStandalone: { backgroundColor: Colors.surface, borderWidth: 1.5, borderColor: Colors.border, borderRadius: Radius.md, paddingHorizontal: 16, paddingVertical: 13, fontSize: Fonts.sizes.md, color: Colors.text, fontFamily: Fonts.body },
+  toggle:    { alignItems: 'center' },
+  toggleText:{ fontFamily: Fonts.body, fontSize: Fonts.sizes.sm, color: Colors.textMuted },
+  toggleLink:{ color: Colors.primary, fontFamily: Fonts.heading },
 })
