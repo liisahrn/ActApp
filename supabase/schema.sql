@@ -29,8 +29,10 @@ CREATE TABLE IF NOT EXISTS actions (
   title           TEXT NOT NULL,
   description     TEXT NOT NULL,
   category        TEXT NOT NULL DEFAULT 'general',
+  action_type     TEXT NOT NULL DEFAULT 'carbon' CHECK (action_type IN ('carbon', 'community')),
   co2_equivalent  NUMERIC(10,3) NOT NULL DEFAULT 0,
   impact_unit     TEXT NOT NULL DEFAULT 'kg CO₂',
+  gem_reward      INTEGER NOT NULL DEFAULT 0,
   status          TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'approved', 'published')),
   publish_date    DATE,
   ai_prompt_used  TEXT,
@@ -179,20 +181,20 @@ INSERT INTO badges (name, description, category, image_url, condition_type, cond
 ON CONFLICT DO NOTHING;
 
 -- ── SEED: SAMPLE ACTIONS (for testing) ────────────────────────
-INSERT INTO actions (title, description, category, co2_equivalent, impact_unit, status, publish_date) VALUES
+INSERT INTO actions (title, description, category, action_type, co2_equivalent, gem_reward, impact_unit, status, publish_date) VALUES
   (
     'Turn off lights in empty rooms',
     'Walk through your home and switch off any lights left on in rooms no one is using. It sounds tiny — but if everyone does it, the numbers are wild.',
-    'energy', 0.5, 'kg CO₂', 'published', CURRENT_DATE
+    'energy', 'carbon', 0.5, 0, 'kg CO₂', 'published', CURRENT_DATE
   ),
   (
     'Tell a friend something you appreciate about them',
     'Send a genuine message to someone you care about. Positive social connections make climate action feel communal, not lonely.',
-    'social', 0.0, 'good deed', 'published', CURRENT_DATE + 1
+    'social', 'community', 0.0, 10, 'good deed', 'published', CURRENT_DATE
   ),
   (
     'Walk or cycle instead of driving today',
     'For any journey under 3km today, choose your feet or a bike instead of a car or bus. Your body and the planet will thank you.',
-    'transport', 1.2, 'kg CO₂', 'approved', CURRENT_DATE + 2
+    'transport', 'carbon', 1.2, 0, 'kg CO₂', 'published', CURRENT_DATE + 1
   )
 ON CONFLICT DO NOTHING;

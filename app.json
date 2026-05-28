@@ -1,54 +1,54 @@
 {
-  "expo": {
-    "name": "ActApp",
-    "slug": "actapp",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "dark",
-    "scheme": "actapp",
-    "splash": {
-      "image": "./assets/splash-icon.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#0D2018"
-    },
-    "ios": {
-      "supportsTablet": false,
-      "bundleIdentifier": "com.actapp.app",
-      "infoPlist": {
-        "NSContactsUsageDescription": "ActApp uses your contacts to help you find and follow friends.",
-        "NSPhotoLibraryAddUsageDescription": "ActApp saves your impact report image to your photo library."
-      }
-    },
-    "plugins": [
-      "expo-router",
-      "expo-secure-store",
-      "expo-sharing",
-      "expo-image",
-      [
-        "expo-notifications",
-        {
-          "icon": "./assets/icon.png",
-          "color": "#2ECC71"
+    "expo": {
+        "name": "ActApp",
+        "slug": "actapp",
+        "version": "1.0.0",
+        "orientation": "portrait",
+        "icon": "./assets/icon.png",
+        "userInterfaceStyle": "dark",
+        "scheme": "actapp",
+        "splash": {
+            "image": "./assets/splash-icon.png",
+            "resizeMode": "contain",
+            "backgroundColor": "#0D2018"
+        },
+        "ios": {
+            "supportsTablet": false,
+            "bundleIdentifier": "com.actapp.app",
+            "infoPlist": {
+                "NSContactsUsageDescription": "ActApp uses your contacts to help you find and follow friends.",
+                "NSPhotoLibraryAddUsageDescription": "ActApp saves your impact report image to your photo library."
+            }
+        },
+        "plugins": [
+            "expo-router",
+            "expo-secure-store",
+            "expo-sharing",
+            "expo-image",
+            [
+                "expo-notifications",
+                {
+                    "icon": "./assets/icon.png",
+                    "color": "#2ECC71"
+                }
+            ],
+            [
+                "expo-contacts",
+                {
+                    "contactsPermission": "Allow ActApp to access your contacts to find friends."
+                }
+            ],
+            [
+                "expo-media-library",
+                {
+                    "photosPermission": "Allow ActApp to save your impact report to your photo library.",
+                    "savePhotosPermission": "Allow ActApp to save your impact report to your photo library."
+                }
+            ],
+            "expo-asset"
+        ],
+        "experiments": {
+            "typedRoutes": true
         }
-      ],
-      [
-        "expo-contacts",
-        {
-          "contactsPermission": "Allow ActApp to access your contacts to find friends."
-        }
-      ],
-      [
-        "expo-media-library",
-        {
-          "photosPermission": "Allow ActApp to save your impact report to your photo library.",
-          "savePhotosPermission": "Allow ActApp to save your impact report to your photo library."
-        }
-      ],
-      "expo-asset"
-    ],
-    "experiments": {
-      "typedRoutes": true
     }
-  }
 }
