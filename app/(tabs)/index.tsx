@@ -128,13 +128,13 @@ export default function TodayScreen() {
 		<View className="flex-1">
 			<Background />
 			<ScrollView
-				contentContainerStyle={{ paddingBottom: 40 }}
+				contentContainerStyle={{ paddingBottom: 110 }}
 				showsVerticalScrollIndicator={false}
 			>
 				{/* Header */}
 				<View
 					style={{
-						paddingHorizontal: 24,
+						paddingHorizontal: 20,
 						paddingTop: 60,
 						paddingBottom: 24,
 						gap: 14,
@@ -142,7 +142,13 @@ export default function TodayScreen() {
 				>
 					<View className="flex-row items-center justify-between">
 						<AppLogo size="sm" />
-						<View style={{ alignItems: "flex-end", gap: 4 }}>
+						<View
+							style={{
+								flexDirection: "row",
+								alignItems: "center",
+								gap: 6,
+							}}
+						>
 							<View
 								className="rounded-full px-3 py-[5] border"
 								style={{
@@ -342,7 +348,7 @@ export default function TodayScreen() {
 							<View
 								style={[
 									{
-										backgroundColor: "rgba(30,50,80,0.7)",
+										backgroundColor: Colors.surfaceDark,
 										borderRadius: Radius.xl,
 										padding: 22,
 										gap: 12,

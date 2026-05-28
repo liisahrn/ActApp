@@ -13,14 +13,30 @@ function TabIcon({
 	focused: boolean;
 }) {
 	return (
-		<View className="items-center gap-[3] w-[72]">
-			<Text style={{ fontSize: 24, opacity: focused ? 1 : 0.38 }}>
-				{emoji}
-			</Text>
+		<View style={{ alignItems: "center", gap: 3, width: 68 }}>
+			<View
+				style={{
+					paddingHorizontal: 14,
+					paddingVertical: 4,
+					borderRadius: 14,
+					backgroundColor: focused
+						? Colors.primaryLight
+						: "transparent",
+				}}
+			>
+				<Text
+					style={{
+						fontSize: focused ? 22 : 20,
+						opacity: focused ? 1 : 0.35,
+					}}
+				>
+					{emoji}
+				</Text>
+			</View>
 			<Text
 				style={{
-					fontFamily: focused ? Fonts.heading : Fonts.body,
-					fontSize: focused ? 10 : 11,
+					fontFamily: Fonts.heading,
+					fontSize: 9,
 					color: focused ? Colors.primary : Colors.textMuted,
 					textAlign: "center",
 				}}
@@ -40,7 +56,7 @@ export default function TabLayout() {
 				tabBarShowLabel: false,
 				tabBarStyle: {
 					borderTopWidth: 1,
-					borderTopColor: Colors.border,
+					borderTopColor: `${Colors.primary}22`,
 					height: 82,
 					paddingBottom: 14,
 					paddingTop: 8,
@@ -48,7 +64,7 @@ export default function TabLayout() {
 				},
 				tabBarBackground: () => (
 					<LinearGradient
-						colors={["rgba(0,0,0,0.6)", "rgba(13,32,24,0.97)"]}
+						colors={["rgba(15,38,17,0.97)", "rgba(8,20,9,0.99)"]}
 						style={{
 							position: "absolute",
 							left: 0,

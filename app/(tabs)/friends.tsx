@@ -293,7 +293,11 @@ export default function FriendsScreen() {
 				data={data}
 				keyExtractor={(i) => i.id}
 				renderItem={renderUser}
-				contentContainerStyle={{ padding: 20, gap: 8 }}
+				contentContainerStyle={{
+					padding: 20,
+					paddingBottom: 110,
+					gap: 8,
+				}}
 				ListEmptyComponent={
 					<EmptyState
 						emoji={activeTab === "friends" ? "👥" : "🌍"}
